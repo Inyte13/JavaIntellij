@@ -1,0 +1,7 @@
+# Eclipse project files
+**/bin/
+**/.settings/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
