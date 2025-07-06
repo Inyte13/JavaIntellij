@@ -1,21 +1,20 @@
 package logica;
-//Class: First with a capital letter
-public class Alumno {
-	
-	//Attributes: Lower case
-	int id;
-	String nombre;
-	String apellido;
-	
-	//Methods/Function: Camel case
-	public void mostrarNombre() {
-		System.out.println("Hola, soy un alumno y mi nombre es ");}
 
-	//Constructor methods/function: Object creation "alt+shift+s"
-	//Empty
-	public Alumno() {}
-	//With attributes
-	public Alumno(int id, String nombre, String apellido) {
+public class Alumno { // Clases: La primera en mayúscula y en singular
+	
+	// Atributos: Minúsculas
+	int id;
+	String nombre, apellido;
+	
+	// Métodos/Funciones: Camel case y en infinitivo
+	public void mostrarNombre() {
+		System.out.println("Hola, mi nombre es ");}
+
+	//Constructor métodos/funciones: Creación de objetos "alt+shift+s"
+	
+	public Alumno() {} // Empty
+	
+	public Alumno(int id, String nombre, String apellido) { // With attributes
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;}
