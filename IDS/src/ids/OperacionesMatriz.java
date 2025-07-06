@@ -2,7 +2,7 @@ package ids;
 
 import java.util.Scanner;
 
-public class SumaRestaProductoMatriz {
+public class OperacionesMatriz {
 	public static void mostrarMatriz(int matriz[][]) { // Método para mostrar la matriz
 		for(int j=0;j<matriz.length;j++) { // Tantas veces como las filas 
 			for(int i=0;i<matriz[0].length;i++) { // Tantas veces como las columnas
