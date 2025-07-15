@@ -1,4 +1,4 @@
-//Laboratorio Nro 17 - Ejercicio 10
+//Laboratorio Nro 23 - Ejercicio 1
 //Autor: Luis Alberto García Daza
 //Colaboró:
 //Tiempo: 2:00
