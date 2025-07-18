@@ -1,6 +1,7 @@
 # Eclipse project files
 **/bin/
 **/.settings/
+*.class
 
 # Archivos de sistema
 .DS_Store
