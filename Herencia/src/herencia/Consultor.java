@@ -1,10 +1,9 @@
 package herencia;
 
-public class Consultor extends Persona{
+public class Consultor extends Persona{ // Hereda de la clase Persona (clase padre)
 	String nombre_consultora;
 	int num_consultor;
 	public Consultor() {}
-	//Constructor that uses fields
 	public Consultor(int id, String dni, String nombre, String apellido, 
 			String domicilio, String telefono, String nombre_consultora, int num_consultor) {
 		super(id, dni, nombre, apellido, domicilio, telefono);

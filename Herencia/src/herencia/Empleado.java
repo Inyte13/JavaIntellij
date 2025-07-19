@@ -1,22 +1,23 @@
 package herencia;
 
-public class Empleado extends Persona{
-	int num_legajo;
+public class Empleado extends Persona{ // Hereda de la clase Persona (clase padre)
+	int identificacion;
 	String cargo;
 	double sueldo;
-	public Empleado() {}
-	//Constructor that uses fields
-	public Empleado(int id, String dni, String nombre, String apellido, String domicilio, 
-			String telefono, int num_legajo, String cargo, double sueldo) {
+	public Empleado() {
+	}
+	public Empleado(int id, String dni, String nombre, String apellido, String domicilio, String telefono,
+			int identificacion, String cargo, double sueldo) {
 		super(id, dni, nombre, apellido, domicilio, telefono);
-		this.num_legajo = num_legajo;
+		this.identificacion = identificacion;
 		this.cargo = cargo;
 		this.sueldo = sueldo;}
-	public int getNum_legajo() {
-		return num_legajo;
+	
+	public int getIdentificacion() {
+		return identificacion;
 	}
-	public void setNum_legajo(int num_legajo) {
-		this.num_legajo = num_legajo;
+	public void setIdentificacion(int identificacion) {
+		this.identificacion = identificacion;
 	}
 	public String getCargo() {
 		return cargo;
@@ -30,6 +31,9 @@ public class Empleado extends Persona{
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
 	}
+	
+	
+	
 	
 	
 	

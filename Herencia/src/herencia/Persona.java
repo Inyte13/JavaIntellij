@@ -15,6 +15,7 @@ public class Persona {
 		this.apellido=apellido;
 		this.domicilio=domicilio;
 		this.telefono=telefono;}
+	
 	public int getId() {
 		return id;
 	}
