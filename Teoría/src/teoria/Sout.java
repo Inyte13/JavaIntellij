@@ -2,7 +2,7 @@ package teoria;
 
 import javax.swing.JOptionPane;
 
-public class SecuenciasEscape {
+public class Sout {
 	public static void main(String[] args) {
 		//\r carriage return
 		//\\ "\"

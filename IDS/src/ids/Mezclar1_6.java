@@ -2,7 +2,7 @@ package ids;
 
 import java.util.*;
 
-public class MezclarElementosAleatorio {
+public class Mezclar1_6 {
 	public static void main(String[] args) { // Main
 		Scanner teclado=new Scanner(System.in);
 		String confirmacion="Y"; // Inicializamos la variable confirmción
