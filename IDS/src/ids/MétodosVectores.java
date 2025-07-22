@@ -45,13 +45,7 @@ public class MétodosVectores {
 			for(int k=0;k<vector[i];k++) System.out.print("*"); // Se repetira vector[i] veces
 			System.out.println();}} // Enter
 	
-	public static void main(String[] args) {
-		Scanner teclado=new Scanner (System.in);
-		// Pedimos la cantidad de alumnos
-		System.out.print("Ingrese la cantidad de alumnos: ");
-		int n=teclado.nextInt();
-		muestra(notasTotales(n), contador(21));
-		teclado.close();}}
+	public static void main(String[] args) {}}
 
 
 

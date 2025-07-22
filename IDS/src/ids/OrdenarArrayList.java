@@ -13,7 +13,6 @@ public class OrdenarArrayList {
 	public static int randomNotas() { // Método random desde [0, 21}
 		return (int)(Math.random()*21);}
 	
-	
 	public static ArrayList<Integer> ordenDescendente(ArrayList<Integer> vector){ // Método ordenDescendete
 		ArrayList<Integer> copiaDeVector=new ArrayList<>(vector); // Copiamos el vector
 		copiaDeVector.sort(Collections.reverseOrder()); // Ordenamos de mayor a menor

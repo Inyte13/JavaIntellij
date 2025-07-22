@@ -18,5 +18,4 @@ public class Mezclar1_6 {
 				System.out.println(vector);}}} // Imprimimos el vector 
 	
 	public static int randomLimite(int a, int b) { // Método randomLimite
-		return (int)(Math.random()*(b-a+1))+a;} // Retornamos un valor random dentro del límite [a,b]
-}
+		return (int)(Math.random()*(b-a+1))+a;}} // Retornamos un valor random dentro del límite [a,b]

@@ -2,7 +2,7 @@ package ids;
 
 import java.util.Scanner;
 
-public class FibonacciRecurrencia {
+public class FibonacciRecursivo {
 	// Creamos el método fibonacci
 	public static int fibonacci(int posicion) {
 		if (posicion==0) // Si la posicion es 0, retornamos 0
