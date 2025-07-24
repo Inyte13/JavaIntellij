@@ -1,6 +1,6 @@
 package strings;
 
-public class Strings {
+public class _String_ {
 	public static void main(String[] args) {
 		String palabra="Hola";
 		char a=palabra.charAt(3); // unaLetra=a (la posicion 3)
