@@ -30,24 +30,23 @@ public class Tokenizador {
 	private static final Map<String, Integer> precedencia = Map.of("+", 1,"-", 1,"*", 2,"/", 2); // Definimos el orden 
 	// de importancia de los "+, -, *, /,"
 	
-	private static boolean esNumero(String token) {
-		return token.matches("\\d+(\\.\\d+)?");}
+	private static boolean esNumero(String str) {
+		return str.matches("\\d+(\\.\\d+)?");} // Si es un número positivo válido retorna true
 	
-	private static boolean esOperador(String token) {
-		return "+-*/".contains(token);}
+	private static boolean esOperador(String str) {
+		return "+-*/".contains(str);} // Si hay "+, -, *, /" lo retorna true
 	
     public static List<String> convertirAPostfija(List<String> tokens) {
         List<String> salida=new ArrayList<>();
         Stack<String> operadores=new Stack<>();
         for (String c:tokens) {
             if (esNumero(c)) {
-                salida.add(c); // Números van directo a la salida
-            } else if (esOperador(c)) {
+                salida.add(c);} // Números van directo a la salida
+            else if (esOperador(c)) {
                 // Mientras haya operadores con mayor o igual precedencia en la pila
-                while (!operadores.isEmpty() && esOperador(operadores.peek()) &&
+                while (!operadores.isEmpty()&&esOperador(operadores.peek())&&
                         precedencia.get(c) <= precedencia.get(operadores.peek())) {
-                    salida.add(operadores.pop());
-                }
+                    salida.add(operadores.pop());}
                 operadores.push(c); // Agregar el nuevo operador a la pila
             } else if (c.equals("(")) {
                 operadores.push(c);
