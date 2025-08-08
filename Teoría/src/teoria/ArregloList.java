@@ -7,7 +7,7 @@ public class ArregloList {
 		Scanner teclado=new Scanner(System.in);
 		
 		//ArrayList<String> nombres=new ArrayList<String>(); // Siempre va en <>
-		ArrayList<String> nombres = new ArrayList<>(Arrays.asList("Luis", "Alberto", "García", "Daza"));
+		ArrayList<String> nombres=new ArrayList<>(Arrays.asList("Luis", "Alberto", "García", "Daza"));
 		nombres.set(2,"Paula"); // Cambio el índice 2 "García" por "Paula"
 		String posicion=nombres.get(2); // Para buscar el índice del arreglo
 		nombres.remove(2); // Remuevo "Paula" y el arreglo pasa 4 elementos a 3
