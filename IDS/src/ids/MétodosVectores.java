@@ -1,7 +1,5 @@
 package ids;
 
-import java.util.Scanner;
-
 public class MétodosVectores {
 	public static int []contador(int n){ // Método contador {0...0}
 		int vector[]=new int[n]; // Creamos el vector
