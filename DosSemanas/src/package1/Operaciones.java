@@ -7,21 +7,21 @@ public class Operaciones {
 	public int getNum1() {
 		return num1;
 	}
-	public void setNum1(int num1) {
-		if(num1>0) this.num1=num1;
+	public void setNum1(int n1) {
+		if(n1>0) n1=num1;
 		else System.out.println("El primer número debe ser mayor que 0");
 	}
 	public int getNum2() {
 		return num2;
 	}
-	public void setNum2(int num2) {
-		if(num2>=1) this.num2=num2;
+	public void setNum2(int n2) {
+		if(n2>=1) n2=num2;
 		else System.out.println("El segundo número debe ser mayor o igual que 1");
 	}
 	// Constructor
-	public Operaciones(int num1, int num2) {
-		setNum1(num1);
-		setNum2(num2);
+	public Operaciones(int n1, int n2) {
+		setNum1(n1);
+		setNum2(n2);
 	}
 	// Métodos
 	public int suma() {
