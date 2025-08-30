@@ -1,47 +1,48 @@
 package ids;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Modificable {
 	public static void main(String[] args) {
 		Scanner teclado=new Scanner(System.in);
-		char matriz[][]=new char[10][10];
-		boolean bandera=true;
-		boolean confirmacion=false;
-		for(int j=0;j<matriz.length;j++) {
-			for(int i=0;i<matriz[0].length;i++) {
-				matriz[j][i]='L';
+		List<Ticket> listTicket=new ArrayList<Ticket>(); // List padre de ArrayList
+		Ticket ticket1=new Ticket(12,2,5,1500,new Date(),new Date());
+		Ticket ticket2=new Ticket();
+		ticket2.setNumero(13);
+		ticket2.setAsiento(4);
+		ticket2.setFila(3);
+		ticket2.setPrecio(2000);
+		ticket2.setDateCompra(new Date());
+		ticket2.setDateValidez(new Date());
+		listTicket.add(ticket1);
+		listTicket.add(ticket2);
+		Ticket ticket3=new Ticket(12,100,200,3000,new Date(2025-8-25),new Date());
+		double sumaPrecios=0;
+		for(Ticket tick:listTicket) {
+			sumaPrecios+=tick.getPrecio();
+		}
+		System.out.println("La suma de los precios son "+sumaPrecios);
+		System.out.print("Ingrese la fila para ver todo los tickets: ");
+		int filaSelect=teclado.nextInt();
+		boolean bandera=false;
+		for(Ticket tick:listTicket) {
+			if(tick.getFila()==filaSelect) {
+				System.out.println(tick.toString());
+				bandera=true;
 			}
 		}
-		while(bandera) {
-			System.out.print("¿Desea ver los asientos disponibles?: ");
-			confirmacion=teclado.nextBoolean();
-			if(confirmacion) {
-				mostrarMatriz(matriz);
-			}
-			System.out.print("Ingrese la fila: ");
-			int f=teclado.nextInt()-1;
-			System.out.print("Ingrese la columna: ");
-			int c=teclado.nextInt()-1;
-			if(matriz[f][c]=='L') {
-				System.out.println("¡Gracias por su compra!");
-				matriz[f][c]='X';
-			}else {
-				System.out.println("Este asiento esta ocupado");
-			}
-			System.out.print("Desea comprar de nuevo?: ");
-			bandera=teclado.nextBoolean();
+		if(bandera==false) {
+			System.out.println("No se encontraron tickets para la fila "+filaSelect);
 		}
-		
-	}
-	public static void mostrarMatriz(char matriz[][]) {
-		for(int j=0;j<matriz.length;j++) {
-			System.out.print(j+1+"\t");
-			for(int i=0;i<matriz[0].length;i++) {
-				System.out.print(matriz[j][i]+"\t");
-			}
-			System.out.println();
-		}				
-		
+		Cliente cli1=new Cliente();
+		cli1.setId(1234);
+		cli1.setDni(2894529);
+		cli1.setNombre("Luis");
+		cli1.setApellido("García");
+		cli1.getListaTicket().add(ticket1);
+		cli1.getListaTicket().add(ticket3);
 	}
 }

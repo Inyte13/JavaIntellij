@@ -11,5 +11,6 @@ public class OperadorTernario {
 		System.out.println(confirmacion);
 		teclado.close();
 	}
+	
 
 }
