@@ -1,8 +1,8 @@
 package ids;
 
 public class MétodosVectores {
-	public static int []contador(int n){ // Método contador {0...0}
-		int vector[]=new int[n]; // Creamos el vector
+	public static int [] contador(int n){ // Método contador {0...0}
+		int vector[]=new int[n]; 
 		for(int i=0;i<vector.length;i++) vector[i]=0; // Todos sus valores serán 0
 		return vector;} // Retornamos
 	
