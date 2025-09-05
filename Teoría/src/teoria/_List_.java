@@ -1,8 +1,12 @@
 package teoria;
 
+import java.util.*;
+
 public class _List_ {
 			
 	public static void main(String[] args) {
+		int listCeros[]=new int[10]; // Crea una lista con 10 "0"
+		System.out.println(listCeros);
 		
 	}
 	public static void max(int list[]) {

@@ -1,4 +1,4 @@
-package ids;
+package teoria;
 
 import java.util.Scanner;
 
@@ -8,6 +8,7 @@ public class OperadorTernario {
 		System.out.print("Ingrese su edad: ");
 		int age=teclado.nextInt();
 		String confirmacion=(age>=18)?"Eres mayor de edad":"Eres menor de edad";
+		// La variable final=condición? V:F
 		System.out.println(confirmacion);
 		teclado.close();
 	}

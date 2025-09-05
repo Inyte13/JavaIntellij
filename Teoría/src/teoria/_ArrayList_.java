@@ -1,7 +1,6 @@
 package teoria;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class _ArrayList_ {
 	
@@ -14,7 +13,16 @@ public class _ArrayList_ {
 		list.remove(10); // Elimina el valor del índice 10
 		list.size(); // Tamaño de la lista
 		list.contains(1); // Booleano que comprueba si esta el "1"
-		System.out.println(list);		
+		list.indexOf(0); // Nos da el índice del primer 0 que encuentre
+		list.lastIndexOf(0); // Nos da el índice el primer 0 que encuentre desde el final
+		ArrayList<Integer> copia=new ArrayList<>(list); // Para copiar la lista
+		ArrayList<Integer> list2=new ArrayList<>(Arrays.asList(2,3,19,5,10,0,1));
+		Collections.sort(list2); // Ordenar la lista ascendentemente
+		Collections.reverse(list2); // Invertir el orden
+		Collections.shuffle(list2); // Mezclar el orden aleatoriamente
+		Collections.max(list2); // El mayor valor
+		Collections.min(list2); // El menor valor
+		System.out.println(Collections.max(list2));		
 	}
 	public static void mayor(ArrayList<Integer> vector) { // Método mayor
 		int mayor=vector.get(0), indice=0; // Inicializamos el valor mayor y el índice
