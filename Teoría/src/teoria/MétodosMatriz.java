@@ -1,4 +1,4 @@
-package ids;
+package teoria;
 
 import java.util.Random;
 import java.util.Scanner;

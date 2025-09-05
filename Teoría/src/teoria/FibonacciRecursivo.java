@@ -1,4 +1,4 @@
-package ids;
+package teoria;
 
 import java.util.Scanner;
 
