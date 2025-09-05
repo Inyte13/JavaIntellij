@@ -1,4 +1,4 @@
-package strings;
+package teoria;
 
 public class _String_ {
 	public static void main(String[] args) {
