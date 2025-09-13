@@ -9,4 +9,6 @@ public class Sout {
 		//\" """
 		//\' "'"
 		JOptionPane.showMessageDialog(null, "Luis\nAlberto\nGarcía\nDaza");
-		System.out.println("Luis\tAlberto\tGarcía\tDaza");}}
+		System.out.println("Luis\tAlberto\tGarcía\tDaza");
+    }
+}
