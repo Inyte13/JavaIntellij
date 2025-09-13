@@ -3,7 +3,7 @@ package laboratorio;
 import java.util.Scanner;
 
 public class Lista {
-	private int n;
+    private int n;
 	private int nums[]=new int[n];
 	public void agregar() {
 		Scanner teclado=new Scanner(System.in);
