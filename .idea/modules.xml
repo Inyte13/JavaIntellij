@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Calculadora/Calculadora.iml" filepath="$PROJECT_DIR$/Calculadora/Calculadora.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ClassAbstract/ClassAbstract.iml" filepath="$PROJECT_DIR$/ClassAbstract/ClassAbstract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DosSemanas/DosSemanas.iml" filepath="$PROJECT_DIR$/DosSemanas/DosSemanas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Encapsulamiento/Encapsulamiento.iml" filepath="$PROJECT_DIR$/Encapsulamiento/Encapsulamiento.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Herencia/Herencia.iml" filepath="$PROJECT_DIR$/Herencia/Herencia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IDS/IDS.iml" filepath="$PROJECT_DIR$/IDS/IDS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Interfaces/Interfaces.iml" filepath="$PROJECT_DIR$/Interfaces/Interfaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaUEclipse.iml" filepath="$PROJECT_DIR$/JavaUEclipse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Laboratorio/Laboratorio.iml" filepath="$PROJECT_DIR$/Laboratorio/Laboratorio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LaboratorioTortuga/LaboratorioTortuga.iml" filepath="$PROJECT_DIR$/LaboratorioTortuga/LaboratorioTortuga.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ModoGrafico/ModoGrafico.iml" filepath="$PROJECT_DIR$/ModoGrafico/ModoGrafico.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Teoría/Teoría.iml" filepath="$PROJECT_DIR$/Teoría/Teoría.iml" />
+    </modules>
+  </component>
+</project>

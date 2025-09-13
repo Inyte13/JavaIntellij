@@ -1,8 +1,11 @@
-# Eclipse project files
-**/bin/
-**/.settings/
+# ===== IntelliJ IDEA =====
+/out/            # Carpeta de compilación de IntelliJ
+/.idea/          # Configuración interna de IntelliJ
+*.iml            # Archivos de módulo de IntelliJ
+
+# ===== Compilados Java =====
 *.class
 
-# Archivos de sistema
+# ===== Archivos de sistema =====
 .DS_Store
 Thumbs.db
