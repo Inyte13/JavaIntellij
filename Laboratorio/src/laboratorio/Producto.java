@@ -7,10 +7,28 @@ public class Producto {
   private String name;
   private int stock;
   
-  public Producto(int code, int stock, String name) {
+  public Producto(int code, String name, int stock) {
     this.code = code;
-    this.stock = stock;
     this.name = name;
+    this.stock = stock;
+  }
+  public int getCode() {
+    return code;
+  }
+  public void setCode(int code) {
+    this.code = code;
+  }
+  public String getName() {
+    return name;
+  }
+  public void setName(String name) {
+    this.name = name;
+  }
+  public int getStock() {
+    return stock;
+  }
+  public void setStock(int stock) {
+    this.stock = stock;
   }
   @Override
   public String toString() {
