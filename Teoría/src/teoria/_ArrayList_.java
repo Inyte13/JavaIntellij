@@ -1,19 +1,21 @@
 package teoria;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class _ArrayList_ {
 	
 	public static void main(String[] args) {
 		ArrayList<Integer> vacio= new ArrayList<>(8); // Reserva internamente pero igual esta vacío
 		ArrayList<Integer> list=new ArrayList<>(Collections.nCopies(10, 0));
-		list.add(9,1); // Se coloca en ese índice y recorre todo lo demás
+		list.add(9,1); // Se coloca en ese índice y recorre lo demás
 		list.set(9, 0); // Remplaza el valor en ese índice
 		list.get(9); // Devuelve el valor del índice 9
 		list.remove(10); // Elimina el valor del índice 10
 		list.size(); // Tamaño de la lista
 		list.contains(1); // Booleano que comprueba si esta el "1"
-		list.indexOf(0); // Nos da el índice del primer 0 que encuentre
+		list.indexOf(0); // Nos da el índice del primer 0 que encuentre y si no -1
 		list.lastIndexOf(0); // Nos da el índice el primer 0 que encuentre desde el final
 		ArrayList<Integer> copia=new ArrayList<>(list); // Para copiar la lista
 		ArrayList<Integer> list2=new ArrayList<>(Arrays.asList(2,3,19,5,10,0,1));
@@ -24,7 +26,7 @@ public class _ArrayList_ {
 		Collections.min(list2); // El menor valor
 		System.out.println(Collections.max(list2));		
 	}
-	public static void mayor(ArrayList<Integer> vector) { // Método mayor
+	public static void mayor(ArrayList<Integer> vector) { 
 		int mayor=vector.get(0), indice=0; // Inicializamos el valor mayor y el índice
 		for(int i=0;i<vector.size();i++) { // Se repetira el tamaño de vector
 			if(vector.get(i)>mayor) { // Si el valor del vector es mayor se guardará como el nuevo mayor
@@ -32,10 +34,10 @@ public class _ArrayList_ {
 				indice=i;
 			}
 		} 
-		System.out.println("El valor mayor es: "+indice+" con valor de: "+mayor+"");
+		System.out.println("El valor mayor es: "+indice+" con valor de: "+mayor);
 	} 
 	
-	public static void menor(ArrayList<Integer> vector) { // Método menor
+	public static void menor(ArrayList<Integer> vector) {
 		int menor=vector.get(0), indice=0; // Inicializamos el valor meno y el índice
 		for(int i=0;i<vector.size();i++) { // Se repetirá el tamaño del vector
 			if(vector.get(i)<menor) { // Si el valor del vector es menor se guardará como el nuevo menor
