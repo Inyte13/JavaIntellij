@@ -7,6 +7,7 @@ import java.util.Collections;
 public class _ArrayList_ {
 	
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		ArrayList<Integer> vacio= new ArrayList<>(8); // Reserva internamente pero igual esta vacío
 		ArrayList<Integer> list=new ArrayList<>(Collections.nCopies(10, 0));
 		list.add(9,1); // Se coloca en ese índice y recorre lo demás
@@ -25,6 +26,27 @@ public class _ArrayList_ {
 		Collections.max(list2); // El mayor valor
 		Collections.min(list2); // El menor valor
 		System.out.println(Collections.max(list2));		
+=======
+    ArrayList<String> nombres = new ArrayList<>(8);
+    ArrayList<Integer> numeros = new ArrayList<>(Collections.nCopies(10, 0)); // Crea un ArrayList de size 10 y values de 0
+    ArrayList<Integer> numeros2 = new ArrayList<>(Arrays.asList(3, 4, 5, 5, 63, 23));
+    numeros.add(1); // Inserta el value de 1 al final de la cola
+    numeros.add(0, 99); // Inserta el value de 99 en el index 0
+    numeros.set(10, -1); // Reemplaza el valor
+    numeros.get(11); // Devuelve el value del index 11
+    numeros.remove(11); // Elimiunar el value del index 11
+    numeros.size(); // Devuelve el tamaño del ArrayList
+    numeros.contains(2); // El value 2 se encuentra en el ArrayList?
+    numeros.indexOf(9); // Busca el value 9, devuelve el index si lo encuentra
+    numeros.lastIndexOf(9); // Busca el value 9 desde atrás, devuelve el index si lo encuentra+
+    ArrayList<Integer> copia = new ArrayList<>(numeros); // Copiar el ArrayList
+    Collections.sort(numeros2); // Ordenar ASC
+    Collections.reverse(numeros2); // Invertir el Orden
+    Collections.shuffle(numeros2); // Mezcla aleatoriamente
+    Collections.max(numeros2); // Devuelve el MAX
+    Collections.min(numeros2); // Deuvelve el MIN
+        
+>>>>>>> b833f35e0fbddfb75519da59654b2563cb21a453
 	}
 	public static void mayor(ArrayList<Integer> vector) { 
 		int mayor=vector.get(0), indice=0; // Inicializamos el valor mayor y el índice
