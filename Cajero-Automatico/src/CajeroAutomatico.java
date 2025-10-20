@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -28,7 +29,17 @@ public class CajeroAutomatico {
     cuentaBancariaActual.retirarDinero(cantidad);
   }
   public void consultarUltimosMovimientos(){
-
+    var generadorAleatorioDeMovimientos=new GeneradorAleatorioDeMovimientos();
+    Scanner teclado=new Scanner(System.in);
+    System.out.println("¿Cuántos movimientos quiere realizar?");
+    int numerosDeMovimientos= teclado.nextInt();
+    ArrayList<String> movimientos=generadorAleatorioDeMovimientos.obtenerMovimientos(numerosDeMovimientos,"soles");
+    mostrarMovimientos(movimientos);
+  }
+  public void mostrarMovimientos(ArrayList<String> movimientos){
+    for(String movimiento:movimientos){
+      System.out.println(movimiento);
+    }
   }
   public void salir(){
     System.out.println("Gracias por utilizar nuestros servicios");
