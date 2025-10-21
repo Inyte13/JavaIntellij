@@ -1,39 +1,31 @@
-public class CuentaBancaria {
+package com.lagarcia.banco;
+
+public abstract class CuentaBancaria {
   private String titular;
   private TipoDeCuenta tipoDeCuenta;
-  private double saldo;
+  protected double saldo;
   private final double COMISION=1.2;
 
-//  Constructor
-  public CuentaBancaria(String titular,TipoDeCuenta tipoDeCuenta, double saldo) {
+  //  Constructor
+  public CuentaBancaria(String titular, TipoDeCuenta tipoDeCuenta, double saldo) {
     this.titular = titular;
     this.tipoDeCuenta = tipoDeCuenta;
     this.saldo = saldo;
   }
-//  Otro constructor, sobrecarga de constructores
+  //  Otro constructor, sobrecarga de constructores
   public CuentaBancaria(String titular, double saldo){
-    this(titular,TipoDeCuenta.AHORRO,saldo); // Usamos this para usar el constructor más completo
+    this(titular, TipoDeCuenta.AHORRO,saldo); // Usamos this para usar el constructor más completo
   }
-//  Constructor default
+  //  Constructor default
   public CuentaBancaria(){
-    this("",TipoDeCuenta.AHORRO,0);
+    this("", TipoDeCuenta.AHORRO,0);
   }
 
   public void retirarDinero(double cantidad){
     if(cantidad<0){
       return;
     }
-    double comision=calcularComision();
-    saldo-=comision;
     saldo-=cantidad;
-  }
-  public double calcularComision(){
-    switch (tipoDeCuenta){
-      case AHORRO:
-        return COMISION;
-      default:
-        return 0;
-    }
   }
   public void ingresarDinero(double cantidad){
     saldo+=cantidad;
@@ -44,14 +36,16 @@ public class CuentaBancaria {
   public double obtenerSaldo(){
     return saldo;
   }
+  public abstract void informarSobreCondidiconesLegales();
 
 
   @Override
   public String toString() {
-    return "CuentaBancaria{" +
+    return "com.lagarcia.banco.CuentaBancaria{" +
         "titular='" + titular + '\'' +
         ", tipoDeCuenta='" + tipoDeCuenta + '\'' +
         ", saldo=" + saldo +
         '}';
   }
 }
+

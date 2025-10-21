@@ -1,3 +1,5 @@
+package com.lagarcia.banco;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -12,3 +14,4 @@ public class Conversor {
     System.out.println("S/."+soles+" equivalen a $"+dolares);
   }
 }
+

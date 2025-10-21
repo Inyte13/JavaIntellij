@@ -1,3 +1,5 @@
+package com.lagarcia.mock;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -43,3 +45,4 @@ public class GeneradorAleatorioDeMovimientos {
 
   }
 }
+
