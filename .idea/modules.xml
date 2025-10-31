@@ -15,8 +15,8 @@
       <module fileurl="file://$PROJECT_DIR$/Laboratorio/Laboratorio.iml" filepath="$PROJECT_DIR$/Laboratorio/Laboratorio.iml" />
       <module fileurl="file://$PROJECT_DIR$/LaboratorioTortuga/LaboratorioTortuga.iml" filepath="$PROJECT_DIR$/LaboratorioTortuga/LaboratorioTortuga.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModoGrafico/ModoGrafico.iml" filepath="$PROJECT_DIR$/ModoGrafico/ModoGrafico.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Postnet/Postnet.iml" filepath="$PROJECT_DIR$/Postnet/Postnet.iml" />
       <module fileurl="file://$PROJECT_DIR$/Teoría/Teoría.iml" filepath="$PROJECT_DIR$/Teoría/Teoría.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sOOPer/sOOPer.iml" filepath="$PROJECT_DIR$/sOOPer/sOOPer.iml" />
     </modules>
   </component>
 </project>
