@@ -8,20 +8,38 @@ public abstract class Persona {
   private String nroTelefono;
   private String idPersona;
   private String correo;
+  private static int count=0;
 
-  public Persona(String nombre, String apellido, String dni, String direccion, String nroTelefono, String idPersona, String correo) {
+  public Persona(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
     this.nombre = nombre;
     this.apellido = apellido;
     this.dni = dni;
     this.direccion = direccion;
     this.nroTelefono = nroTelefono;
-    this.idPersona = idPersona;
+    count++;
+    this.idPersona = "Id-"+count;
     this.correo = correo;
   }
-  private Cliente buscar(){
-    return Cliente;
+  private Persona buscar(){
+    return null;
   }
-  private void mostrarDatos(){
 
+  public String getNombre() {
+    return nombre;
+  }
+
+  public String getApellido() {
+    return apellido;
+  }
+
+  public String mostrarPersona() {
+    return "-------------------\n" +
+        "Nombre: "+nombre+"\n" +
+        "Apellido: "+apellido+"\n" +
+        "DNI: "+dni+"\n" +
+        "Direccion: "+direccion+"\n" +
+        "Número de teléfono: "+nroTelefono+"\n" +
+        "ID: "+idPersona+"\n" +
+        "Correo: "+correo+"\n";
   }
 }
