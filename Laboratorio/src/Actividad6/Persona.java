@@ -6,8 +6,8 @@ public abstract class Persona {
   private String dni;
   private String direccion;
   private String nroTelefono;
-  private String idPersona;
   private String correo;
+  private String idPersona;
   private static int count=0;
 
   public Persona(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
@@ -16,12 +16,9 @@ public abstract class Persona {
     this.dni = dni;
     this.direccion = direccion;
     this.nroTelefono = nroTelefono;
-    count++;
-    this.idPersona = "Id-"+count;
     this.correo = correo;
-  }
-  private Persona buscar(){
-    return null;
+    count++;
+    this.idPersona = "P-"+count;
   }
 
   public String getNombre() {

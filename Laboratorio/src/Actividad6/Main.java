@@ -3,10 +3,12 @@ package Actividad6;
 public class Main {
   public static void main(String[] args) {
     Banco banco = new Banco();
+    // Crear admins
+    Administrador admin1=new Administrador("Luis", "García","60758627", "389")
 
     // Crear empleados
     Empleado empleado1 = new Empleado("John", "Flores", "12345687", "123", "939045911", "john@unsa.edu.pe", "Admin");
-    Empleado empleado2 = new Empleado("María", "García", "87654321", "456", "987654321", "maria@unsa.edu.pe", "Cajero");
+    Empleado empleado2 = new Empleado("María", "Aragón", "87654321", "456", "987654321", "maria@unsa.edu.pe", "Cajero");
 
     // Registrar clientes
     Cliente cliente1 = empleado1.registrarClientes(banco,"Luis", "Alberto", "65494832", "391", "945678999","luis13@unsa.edu.pe");

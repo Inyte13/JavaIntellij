@@ -10,9 +10,11 @@ public class Banco {
     empleados=new ArrayList<>();
     clientes=new ArrayList<>();
   }
+
   public void agregarEmpleado(Empleado empleado){
     empleados.add(empleado);
   }
+
   public void agregarCliente(Cliente cliente){
     clientes.add(cliente);
   }
@@ -22,6 +24,7 @@ public class Banco {
       System.out.println(empleado.mostrarEmpleado());
     }
   }
+
   public void mostrarClientes(){
     for(Cliente cliente:clientes){
       System.out.println(cliente.mostrarCliente());

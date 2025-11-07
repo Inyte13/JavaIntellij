@@ -3,7 +3,9 @@ package Actividad6;
 import java.util.ArrayList;
 
 public class Cliente extends Persona{
+
   private ArrayList<ClienteCuenta> clienteCuentas;
+
   private Empleado creador;
 
   private Cliente(Empleado empleado,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
@@ -16,7 +18,7 @@ public class Cliente extends Persona{
     return new Cliente(empleado,nombre,apellido, dni, direccion, nroTelefono, correo);
   }
 
-  public ClienteCuenta registrarCuenta(TipoCuenta tipoCuenta){
+  public ClienteCuenta registrarClienteCuenta(TipoCuenta tipoCuenta){
     return ClienteCuenta.crearClienteCuenta(this,tipoCuenta);
   }
 

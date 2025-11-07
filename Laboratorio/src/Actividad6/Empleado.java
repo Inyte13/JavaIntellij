@@ -3,11 +3,17 @@ package Actividad6;
 import java.util.ArrayList;
 
 public class Empleado extends Persona{
+
   private String cargo;
 
-  public Empleado(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String cargo) {
+  private Empleado(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String cargo) {
     super(nombre, apellido, dni, direccion, nroTelefono, correo);
     this.cargo = cargo;
+  }
+
+  static Empleado crearEmpleado(Administrador admin,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String cargo){
+    return new Empleado(nombre,apellido,dni,direccion,nroTelefono,correo,cargo);
+
   }
 
   public Cliente registrarClientes(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
@@ -15,12 +21,15 @@ public class Empleado extends Persona{
     banco.agregarCliente(cliente);
     return cliente;
   }
+
   public ClienteCuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){
     return ClienteCuenta.crearClienteCuenta(this,cliente,Cuenta.crearCuenta(tipoCuenta));
   }
+
   public ClienteCuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
     return ClienteCuenta.crearClienteCuenta(this,cliente,Cuenta.crearCuenta(tipoCuenta,saldo));
   }
+
   public ClienteCuenta vincularClienteACuenta(Cliente solicitante, Cliente nuevoTitular, String numeroCuenta){
     Cuenta cuentaSolicitante=buscarCuenta(solicitante.getClienteCuentas(),numeroCuenta);
     Cuenta cuentaNuevoTitular=buscarCuenta(nuevoTitular.getClienteCuentas(),numeroCuenta);
@@ -29,6 +38,7 @@ public class Empleado extends Persona{
     }
     return null;
   }
+
   public Cuenta buscarCuenta(ArrayList<ClienteCuenta> cuentas, String numeroCuenta){
     for(ClienteCuenta clienteCuenta:cuentas){
       if(clienteCuenta.getCuenta().getNumeroCuenta().equals(numeroCuenta)){
@@ -37,6 +47,7 @@ public class Empleado extends Persona{
     }
     return null;
   }
+
   private boolean verificarCuenta(Cuenta cuenta){
     return cuenta!=null;
   }
