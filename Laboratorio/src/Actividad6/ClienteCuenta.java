@@ -8,17 +8,11 @@ public class ClienteCuenta {
     this.cliente = cliente;
     this.cuenta = cuenta;
   }
-  static ClienteCuenta crearClienteCuenta(Cliente cliente, TipoCuenta tipoCuenta){
+  static ClienteCuenta crearClienteCuenta(Persona creador,Cliente cliente, TipoCuenta tipoCuenta){
     Cuenta nuevaCuenta=Cuenta.crearCuenta(tipoCuenta);
     ClienteCuenta clienteCuenta=new ClienteCuenta(cliente,nuevaCuenta);
     cliente.getClienteCuentas().add(clienteCuenta);
     nuevaCuenta.getClienteCuentas().add(clienteCuenta);
-    return clienteCuenta;
-  }
-  static ClienteCuenta crearClienteCuenta(Empleado empleado,Cliente cliente, Cuenta cuenta){
-    ClienteCuenta clienteCuenta=new ClienteCuenta(cliente,cuenta);
-    cliente.getClienteCuentas().add(clienteCuenta);
-    cuenta.getClienteCuentas().add(clienteCuenta);
     return clienteCuenta;
   }
   public Cuenta getCuenta() {

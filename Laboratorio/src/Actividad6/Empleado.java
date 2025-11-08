@@ -4,56 +4,43 @@ import java.util.ArrayList;
 
 public class Empleado extends Persona{
 
-  private String cargo;
+  private TipoCargo cargo;
+  private Persona creador;
 
-  private Empleado(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String cargo) {
+  private Empleado(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo) {
     super(nombre, apellido, dni, direccion, nroTelefono, correo);
     this.cargo = cargo;
+    this.creador = creador;
+  }
+  // Constructor controlado
+  static Empleado crearEmpleado(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo){
+    return new Empleado(creador,nombre,apellido,dni,direccion,nroTelefono,correo,cargo);
   }
 
-  static Empleado crearEmpleado(Administrador admin,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String cargo){
-    return new Empleado(nombre,apellido,dni,direccion,nroTelefono,correo,cargo);
 
+  public Cliente registrarClientes(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
+    return Banco.registrarClientes(this,nombre,apellido,dni,direccion,nroTelefono,correo);
   }
 
-  public Cliente registrarClientes(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    Cliente cliente=Cliente.crearCliente(this,nombre,apellido,dni, direccion, nroTelefono,correo);
-    banco.agregarCliente(cliente);
-    return cliente;
+  public ClienteCuenta registrarClienteCuenta(Cliente cliente,TipoCuenta tipoCuenta){
+    return Banco.registrarClienteCuenta(this,cliente,tipoCuenta);
   }
 
-  public ClienteCuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){
-    return ClienteCuenta.crearClienteCuenta(this,cliente,Cuenta.crearCuenta(tipoCuenta));
-  }
-
-  public ClienteCuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
-    return ClienteCuenta.crearClienteCuenta(this,cliente,Cuenta.crearCuenta(tipoCuenta,saldo));
+  public ClienteCuenta registrarClienteCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
+    return Banco.registrarClienteCuenta(this,cliente,tipoCuenta,saldo);
   }
 
   public ClienteCuenta vincularClienteACuenta(Cliente solicitante, Cliente nuevoTitular, String numeroCuenta){
-    Cuenta cuentaSolicitante=buscarCuenta(solicitante.getClienteCuentas(),numeroCuenta);
-    Cuenta cuentaNuevoTitular=buscarCuenta(nuevoTitular.getClienteCuentas(),numeroCuenta);
-    if(verificarCuenta(cuentaSolicitante)&&!verificarCuenta(cuentaNuevoTitular)){
-      return ClienteCuenta.crearClienteCuenta(this,nuevoTitular,cuentaSolicitante);
-    }
-    return null;
+    return Banco.vincularClienteACuenta(this,solicitante,nuevoTitular,numeroCuenta);
   }
 
   public Cuenta buscarCuenta(ArrayList<ClienteCuenta> cuentas, String numeroCuenta){
-    for(ClienteCuenta clienteCuenta:cuentas){
-      if(clienteCuenta.getCuenta().getNumeroCuenta().equals(numeroCuenta)){
-        return clienteCuenta.getCuenta();
-      }
-    }
-    return null;
+    return Banco.buscarCuenta(cuentas,numeroCuenta);
   }
 
-  private boolean verificarCuenta(Cuenta cuenta){
-    return cuenta!=null;
-  }
 
   public String mostrarEmpleado() {
-    return super.mostrarPersona()+"Cargo: "+cargo;
+    return super.mostrarPersona()+"Cargo: "+cargo+"\nRegistrado por: "+creador.getNombre()+" "+creador.getApellido();
   }
 
 }

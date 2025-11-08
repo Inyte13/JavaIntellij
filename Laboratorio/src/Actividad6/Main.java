@@ -3,62 +3,35 @@ package Actividad6;
 public class Main {
   public static void main(String[] args) {
     Banco banco = new Banco();
-    // Crear admins
-    Administrador admin1=new Administrador("Luis", "García","60758627", "389")
+    // Super admin
+    Administrador superAdmin=Administrador.registrarSuperAdmin(banco,"Luis","García","75608627","123","989045911","lgarciada@unsa.edu.pe");
 
-    // Crear empleados
-    Empleado empleado1 = new Empleado("John", "Flores", "12345687", "123", "939045911", "john@unsa.edu.pe", "Admin");
-    Empleado empleado2 = new Empleado("María", "Aragón", "87654321", "456", "987654321", "maria@unsa.edu.pe", "Cajero");
+    // Creando admins
+    Administrador admin1=superAdmin.registrarAdmin(banco,"Oriana","del Pilar","12345678","456","948384940","ocutipa@unsa.edu.pe");
 
-    // Registrar clientes
-    Cliente cliente1 = empleado1.registrarClientes(banco,"Luis", "Alberto", "65494832", "391", "945678999","luis13@unsa.edu.pe");
-    Cliente cliente2 = empleado2.registrarClientes(banco,"Sofia", "Paredes", "73829456", "218", "956789012", "sofia@unsa.edu.pe");
+    Administrador admin2=superAdmin.registrarAdmin(banco,"Camila", "Flores", "23456781","789","932432849","cflaca@unsa.edu.pe");
 
-    // Agregar empleados al banco
-    banco.agregarEmpleado(empleado1);
-    banco.agregarEmpleado(empleado2);
+    // Creando empleados
+    Empleado emp1=admin1.registrarEmpleado("Lucía","Corrales","34567891","891","932483922","lcorrales@unsa.edu.pe",TipoCargo.ASESOR_FINANCIERO);
 
-    // Mostrar empleados y clientes
-    banco.mostrarEmpleados();
-    banco.mostrarClientes();
+    Empleado emp2=admin2.registrarEmpleado("Mario","Luigi","43829389","389","943883921","mluigi@unsa.edu,pe",TipoCargo.ANALISTA_CREDITO);
 
-    // Cliente1 crea cuenta propia
-    ClienteCuenta cc1 = cliente1.registrarCuenta(TipoCuenta.AHORRO);
-    System.out.println("\n--- Cliente1 crea cuenta AHORRO ---");
-    cliente1.mostrarCuentas();
+    // Creando clientes
+    Cliente cl1=emp1.registrarClientes("Anabel","Benito","48399392","389","983929038","abenito@unsa.edu.pe");
 
-    // Empleado1 crea cuenta corriente para cliente1
-    ClienteCuenta cc2 = empleado1.registrarCuenta(cliente1, TipoCuenta.CORRIENTE);
-    // Empleado1 crea cuenta ahorro con saldo inicial
-    ClienteCuenta cc3 = empleado1.registrarCuenta(cliente1, TipoCuenta.AHORRO, 200);
+    Cliente cl2=emp2.registrarClientes("Estrella","Juarez","48992838","382","938382839","ejuarez@unsa.edu.pe");
 
-    System.out.println("\n--- Cliente1 después de cuentas creadas por empleado ---");
-    cliente1.mostrarCuentas();
+    // Registrando cuentas
+    emp1.registrarCuenta(cl1,TipoCuenta.AHORRO,4893.89);
+    emp2.registrarCuenta(cl2,TipoCuenta.CORRIENTE);
 
-    // Vincular cliente2 a la primera cuenta de cliente1
-    String numeroCuenta = cc1.getCuenta().getNumeroCuenta();
-    empleado1.vincularClienteACuenta(cliente1, cliente2, numeroCuenta);
+    emp1.buscarCuenta()
 
-    System.out.println("\n--- Cuentas después de vincular cliente2 ---");
-    cliente1.mostrarCuentas();
-    cliente2.mostrarCuentas();
+    // Añadiendo titulares a una cuenta
+    emp1.vincularClienteACuenta(cl1,cl2,"000001");
 
-    // Realizar transacciones
-    System.out.println("\n--- Realizando transacciones ---");
-    cc1.getCuenta().depositar(500);
-    cc1.getCuenta().retirar(150);
-    cc3.getCuenta().depositar(1000);
+    cl1.buscarCuenta("000001").depositar(4329.433);
+    cl1.mostrarCuentas();
 
-    // Mostrar movimientos
-    System.out.println("\n--- Movimientos de las cuentas ---");
-    for(ClienteCuenta cc : cliente1.getClienteCuentas()){
-      System.out.println(cc.getCuenta().mostrarCuenta());
-      cc.getCuenta().mostrarMovimientos();
-    }
-
-    for(ClienteCuenta cc : cliente2.getClienteCuentas()){
-      System.out.println(cc.getCuenta().mostrarCuenta());
-      cc.getCuenta().mostrarMovimientos();
-    }
   }
 }

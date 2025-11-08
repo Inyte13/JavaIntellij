@@ -1,5 +1,5 @@
 package Actividad6;
 
 public enum TipoTransaccion {
-  DEPOSITO, RETIRO
+  DEPOSITO, RETIRO, TRANSFERENCIA
 }

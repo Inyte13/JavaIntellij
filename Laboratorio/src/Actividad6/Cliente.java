@@ -4,22 +4,21 @@ import java.util.ArrayList;
 
 public class Cliente extends Persona{
 
+  private Persona creador;
   private ArrayList<ClienteCuenta> clienteCuentas;
 
-  private Empleado creador;
-
-  private Cliente(Empleado empleado,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
+  private Cliente(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
     super(nombre, apellido, dni, direccion, nroTelefono, correo);
+    this.creador=creador;
     this.clienteCuentas = new ArrayList<>();
-    this.creador=empleado;
   }
-
-  static Cliente crearCliente(Empleado empleado, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    return new Cliente(empleado,nombre,apellido, dni, direccion, nroTelefono, correo);
+  // Un método static se puede usar sin crear un objeto
+  static Cliente crearCliente(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
+    return new Cliente(creador,nombre,apellido, dni, direccion, nroTelefono, correo);
   }
 
   public ClienteCuenta registrarClienteCuenta(TipoCuenta tipoCuenta){
-    return ClienteCuenta.crearClienteCuenta(this,tipoCuenta);
+    return ClienteCuenta.crearClienteCuenta(this,this,tipoCuenta);
   }
 
   public ArrayList<ClienteCuenta> getClienteCuentas() {
@@ -30,6 +29,11 @@ public class Cliente extends Persona{
       System.out.println(cc.getCuenta().mostrarCuenta());
     }
   }
+
+  public Cuenta buscarCuenta(String numeroCuenta){
+    return Banco.buscarCuenta(this.clienteCuentas,numeroCuenta);
+  }
+
   public String mostrarCliente() {
     return super.mostrarPersona()+"Registrado por: "+ creador.getNombre()+" "+creador.getApellido();
   }

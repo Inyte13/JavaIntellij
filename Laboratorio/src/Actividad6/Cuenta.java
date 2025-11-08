@@ -2,7 +2,6 @@ package Actividad6;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Cuenta {
   private TipoCuenta tipoCuenta;
@@ -11,6 +10,7 @@ public class Cuenta {
   private LocalDateTime fechaApertura;
   private ArrayList<Transaccion> transacciones;
   private ArrayList<ClienteCuenta> clienteCuentas;
+  private static int count=1;
 
   private Cuenta(TipoCuenta tipoCuenta, double saldo) {
     this.tipoCuenta = tipoCuenta;
@@ -28,16 +28,16 @@ public class Cuenta {
     this.transacciones = new ArrayList<>();
     this.clienteCuentas = new ArrayList<>();
   }
+  private String generarNumeroCuenta(){
+    return String.format("%06d",count++);
+  }
+
 
   static Cuenta crearCuenta(TipoCuenta tipoCuenta){
     return new Cuenta(tipoCuenta);
   }
   static Cuenta crearCuenta(TipoCuenta tipoCuenta, double saldo){
     return new Cuenta(tipoCuenta,saldo);
-  }
-
-  private String generarNumeroCuenta(){
-    return "Cuenta-" + UUID.randomUUID();
   }
 
   private void anadirTransaccion(Transaccion transaccion){
@@ -61,6 +61,30 @@ public class Cuenta {
     anadirTransaccion(transaccion);
     return transaccion;
   }
+  public Transaccion retirar(double monto,TipoTransaccion t){
+    if(0<monto&&monto<=saldo){
+      this.saldo-=monto;
+    }
+    Transaccion transaccion=Transaccion.crearTransaccion(t,monto);
+    anadirTransaccion(transaccion);
+    return transaccion;
+  }
+
+  public Transaccion depositar(double monto,TipoTransaccion t){
+    if(monto>0){
+      this.saldo+=monto;
+    }
+    Transaccion transaccion=Transaccion.crearTransaccion(t,monto);
+    anadirTransaccion(transaccion);
+    return transaccion;
+  }
+
+  public Transaccion transferir(Banco banco,double monto,String nroCuenta){
+    this.retirar(monto,TipoTransaccion.TRANSFERENCIA);
+    Banco.buscarCuenta()
+
+    this.depositar(monto,TipoTransaccion.TRANSFERENCIA)
+  }
 
   public void mostrarMovimientos(){
     System.out.println("Movimientos de la cuenta "+numeroCuenta+": ");
@@ -79,6 +103,10 @@ public class Cuenta {
 
   public String getNumeroCuenta() {
     return numeroCuenta;
+  }
+
+  public TipoCuenta getTipoCuenta() {
+    return tipoCuenta;
   }
 
   public ArrayList<ClienteCuenta> getClienteCuentas() {
