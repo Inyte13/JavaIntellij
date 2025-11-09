@@ -22,12 +22,12 @@ public class Empleado extends Persona{
     return Banco.registrarClientes(this,nombre,apellido,dni,direccion,nroTelefono,correo);
   }
 
-  public ClienteCuenta registrarClienteCuenta(Cliente cliente,TipoCuenta tipoCuenta){
-    return Banco.registrarClienteCuenta(this,cliente,tipoCuenta);
+  public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){
+    return Banco.registrarCuenta(this,cliente,tipoCuenta);
   }
 
-  public ClienteCuenta registrarClienteCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
-    return Banco.registrarClienteCuenta(this,cliente,tipoCuenta,saldo);
+  public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
+    return Banco.registrarCuenta(this,cliente,tipoCuenta,saldo);
   }
 
   public ClienteCuenta vincularClienteACuenta(Cliente solicitante, Cliente nuevoTitular, String numeroCuenta){

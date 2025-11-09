@@ -10,9 +10,23 @@ public class Administrador extends Persona{
     super(nombre, apellido, dni, direccion, nroTelefono, correo);
     this.creador = creador;
   }
+
+  // El super admin
+  static Administrador registrarSuperAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
+    Administrador admin=new Administrador(null, nombre, apellido, dni, direccion, nroTelefono, correo);
+    banco.agregarAdmin(admin);
+    return admin;
+  }
+
   // Constructor controlado
   static Administrador crearAdmin(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
     return new Administrador(creador,nombre,apellido,dni,direccion,nroTelefono,correo);
+  }
+
+  public Administrador registrarAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
+    Administrador admin=Administrador.crearAdmin(this,nombre,apellido,dni,direccion,nroTelefono,correo);
+    banco.agregarAdmin(admin);
+    return admin;
   }
 
 
@@ -24,12 +38,12 @@ public class Administrador extends Persona{
     return Banco.registrarClientes(this,nombre,apellido,dni,direccion,nroTelefono,correo);
   }
 
-  public ClienteCuenta registrarClienteCuenta(Cliente cliente,TipoCuenta tipoCuenta){
-    return Banco.registrarClienteCuenta(this,cliente,tipoCuenta);
+  public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){
+    return Banco.registrarCuenta(this,cliente,tipoCuenta);
   }
 
-  public ClienteCuenta registrarClienteCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
-    return Banco.registrarClienteCuenta(this,cliente,tipoCuenta,saldo);
+  public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
+    return Banco.registrarCuenta(this,cliente,tipoCuenta,saldo);
   }
 
   public ClienteCuenta vincularClienteACuenta(Cliente solicitante, Cliente nuevoTitular, String numeroCuenta){
@@ -37,22 +51,10 @@ public class Administrador extends Persona{
   }
 
 
-  // El super admin
-  static Administrador crearSuperAdmin(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    return new Administrador(null, nombre, apellido, dni, direccion, nroTelefono, correo);
-  }
 
 
-  public Administrador registrarAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    Administrador admin=Administrador.crearAdmin(this,nombre,apellido,dni,direccion,nroTelefono,correo);
-    banco.agregarAdmin(admin);
-    return admin;
-  }
-  static Administrador registrarSuperAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    Administrador admin=Administrador.crearSuperAdmin(nombre,apellido,dni,direccion,nroTelefono,correo);
-    banco.agregarAdmin(admin);
-    return admin;
-  }
+
+
 
   public Cuenta buscarCuenta(ArrayList<ClienteCuenta> cuentas, String numeroCuenta){
     return Banco.buscarCuenta(cuentas,numeroCuenta);

@@ -8,19 +8,22 @@ public class Transaccion {
   private TipoTransaccion tipoTransaccion;
   private double monto;
   private static int count=1;
+  private Persona creador;
 
-  private Transaccion(TipoTransaccion tipoTransaccion, double monto) {
+  private Transaccion(Persona creador,TipoTransaccion tipoTransaccion, double monto) {
     this.numeroTransaccion = generarNumeroTransaccion();
     this.fechaTransaccion = LocalDateTime.now();
     this.tipoTransaccion = tipoTransaccion;
     this.monto = monto;
+    this.creador=creador;
   }
-  public static Transaccion crearTransaccion(TipoTransaccion tipo, double monto) {
-    return new Transaccion(tipo, monto);
+  public static Transaccion crearTransaccion(Persona creador,TipoTransaccion tipo, double monto) {
+    return new Transaccion(creador,tipo, monto);
   }
   private String generarNumeroTransaccion(){
     return "Transaccion-"+count++;
   }
+
 
   @Override
   public String toString() {

@@ -10,80 +10,74 @@ public class Cuenta {
   private LocalDateTime fechaApertura;
   private ArrayList<Transaccion> transacciones;
   private ArrayList<ClienteCuenta> clienteCuentas;
+  private Persona creador;
   private static int count=1;
 
-  private Cuenta(TipoCuenta tipoCuenta, double saldo) {
+  private String generarNumeroCuenta(){
+    return String.format("%06d",count++);
+  }
+  private Cuenta(Persona creador,TipoCuenta tipoCuenta, double saldo) {
     this.tipoCuenta = tipoCuenta;
     this.saldo = saldo;
     this.numeroCuenta = generarNumeroCuenta();
     this.fechaApertura = LocalDateTime.now();
     this.transacciones = new ArrayList<>();
     this.clienteCuentas = new ArrayList<>();
+    this.creador=creador;
   }
-  private Cuenta(TipoCuenta tipoCuenta) {
+  private Cuenta(Persona creador,TipoCuenta tipoCuenta) {
     this.tipoCuenta = tipoCuenta;
     this.saldo = 0.0;
     this.numeroCuenta = generarNumeroCuenta();
     this.fechaApertura = LocalDateTime.now();
     this.transacciones = new ArrayList<>();
     this.clienteCuentas = new ArrayList<>();
-  }
-  private String generarNumeroCuenta(){
-    return String.format("%06d",count++);
+    this.creador=creador;
   }
 
 
-  static Cuenta crearCuenta(TipoCuenta tipoCuenta){
-    return new Cuenta(tipoCuenta);
+  static Cuenta crearCuenta(Persona creador,TipoCuenta tipoCuenta){
+    return new Cuenta(creador,tipoCuenta);
   }
-  static Cuenta crearCuenta(TipoCuenta tipoCuenta, double saldo){
-    return new Cuenta(tipoCuenta,saldo);
+  static Cuenta crearCuenta(Persona creador,TipoCuenta tipoCuenta, double saldo){
+    return new Cuenta(creador,tipoCuenta,saldo);
   }
+
+  public Transaccion retirar(Persona creador,double monto){
+    if (monto <= 0 || monto > saldo){
+      return null;
+    }
+    saldo -= monto;
+    Transaccion transaccion=Transaccion.crearTransaccion(creador,TipoTransaccion.RETIRO,monto);
+    anadirTransaccion(transaccion);
+    return transaccion;
+  }
+
+  public Transaccion deposito(Persona creador,double monto){
+    if (monto <= 0){
+      return null;
+    }
+    saldo += monto;
+    Transaccion transaccion=Transaccion.crearTransaccion(creador,TipoTransaccion.DEPOSITO,monto);
+    anadirTransaccion(transaccion);
+    return transaccion;
+  }
+
+  public Transaccion transferencia(Persona creador,double monto,Cuenta cuenta){
+    if (monto <= 0|| monto > saldo){
+      return null;
+    }
+    saldo -= monto;
+    Transaccion transaccion=Transaccion.crearTransaccion(creador,TipoTransaccion.TRANSFERENCIA,monto);
+    anadirTransaccion(transaccion);
+    cuenta.setSaldo(cuenta.getSaldo()+monto);
+    cuenta.anadirTransaccion(transaccion);
+    return transaccion;
+  }
+
 
   private void anadirTransaccion(Transaccion transaccion){
     this.transacciones.add(transaccion);
-  }
-
-  public Transaccion retirar(double monto){
-    if(0<monto&&monto<=saldo){
-      this.saldo-=monto;
-    }
-    Transaccion transaccion=Transaccion.crearTransaccion(TipoTransaccion.RETIRO,monto);
-    anadirTransaccion(transaccion);
-    return transaccion;
-  }
-
-  public Transaccion depositar(double monto){
-    if(monto>0){
-      this.saldo+=monto;
-    }
-    Transaccion transaccion=Transaccion.crearTransaccion(TipoTransaccion.DEPOSITO,monto);
-    anadirTransaccion(transaccion);
-    return transaccion;
-  }
-  public Transaccion retirar(double monto,TipoTransaccion t){
-    if(0<monto&&monto<=saldo){
-      this.saldo-=monto;
-    }
-    Transaccion transaccion=Transaccion.crearTransaccion(t,monto);
-    anadirTransaccion(transaccion);
-    return transaccion;
-  }
-
-  public Transaccion depositar(double monto,TipoTransaccion t){
-    if(monto>0){
-      this.saldo+=monto;
-    }
-    Transaccion transaccion=Transaccion.crearTransaccion(t,monto);
-    anadirTransaccion(transaccion);
-    return transaccion;
-  }
-
-  public Transaccion transferir(Banco banco,double monto,String nroCuenta){
-    this.retirar(monto,TipoTransaccion.TRANSFERENCIA);
-    Banco.buscarCuenta()
-
-    this.depositar(monto,TipoTransaccion.TRANSFERENCIA)
   }
 
   public void mostrarMovimientos(){
@@ -101,24 +95,34 @@ public class Cuenta {
     return titulares;
   }
 
+
+
   public String getNumeroCuenta() {
     return numeroCuenta;
   }
-
-  public TipoCuenta getTipoCuenta() {
-    return tipoCuenta;
-  }
-
   public ArrayList<ClienteCuenta> getClienteCuentas() {
     return clienteCuentas;
   }
+  public double getSaldo() {
+    return saldo;
+  }
+  public void setSaldo(double saldo) {
+    this.saldo = saldo;
+  }
 
   public String mostrarCuenta() {
-    return "-------------------\n" +
-        "Titulares: "+String.join(", ",getTitulares())+"\n"+
-        "Tipo de cuenta: "+tipoCuenta+"\n" +
-        "Saldo: S/."+saldo+"\n" +
-        "Número de Cuenta: "+numeroCuenta+"\n" +
-        "Fecha de apertura: "+fechaApertura+"\n";
+    StringBuilder sb = new StringBuilder();
+    sb.append("-------------------\n")
+        .append("Titulares: ").append(String.join(", ", getTitulares())).append("\n")
+        .append("Tipo de cuenta: ").append(tipoCuenta).append("\n")
+        .append("Saldo: S/.").append(saldo).append("\n")
+        .append("Número de Cuenta: ").append(numeroCuenta).append("\n")
+        .append("Fecha de apertura: ").append(fechaApertura).append("\n");
+
+    for (ClienteCuenta cc : getClienteCuentas()) {
+      sb.append(cc.mostrarClienteCuenta()).append("\n");
+    }
+    return sb.toString();
   }
+
 }
