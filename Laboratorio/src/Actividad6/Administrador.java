@@ -6,36 +6,36 @@ public class Administrador extends Persona{
 
   private Administrador creador;
 
-  private Administrador(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
-    super(nombre, apellido, dni, direccion, nroTelefono, correo);
+  private Administrador(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena) {
+    super(nombre, apellido, dni, direccion, nroTelefono, correo, contrasena);
     this.creador = creador;
   }
 
   // El super admin
-  static Administrador registrarSuperAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    Administrador admin=new Administrador(null, nombre, apellido, dni, direccion, nroTelefono, correo);
+  static Administrador registrarSuperAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena){
+    Administrador admin=new Administrador(null, nombre, apellido, dni, direccion, nroTelefono, correo, contrasena);
     banco.agregarAdmin(admin);
     return admin;
   }
 
   // Constructor controlado
-  static Administrador crearAdmin(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    return new Administrador(creador,nombre,apellido,dni,direccion,nroTelefono,correo);
+  private static Administrador crearAdmin(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena){
+    return new Administrador(creador,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
   }
 
-  public Administrador registrarAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    Administrador admin=Administrador.crearAdmin(this,nombre,apellido,dni,direccion,nroTelefono,correo);
+  public Administrador registrarAdmin(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena){
+    Administrador admin=Administrador.crearAdmin(this,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
     banco.agregarAdmin(admin);
     return admin;
   }
 
 
-  public Empleado registrarEmpleado(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo){
-   return Banco.registrarEmpleado(this,nombre,apellido,dni,direccion,nroTelefono,correo,cargo);
+  public Empleado registrarEmpleado(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo,String contrasena){
+   return Banco.registrarEmpleado(this,nombre,apellido,dni,direccion,nroTelefono,correo,cargo,contrasena);
   }
 
-  public Cliente registrarClientes(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    return Banco.registrarClientes(this,nombre,apellido,dni,direccion,nroTelefono,correo);
+  public Cliente registrarCliente(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena){
+    return Banco.registrarCliente(this,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
   }
 
   public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){

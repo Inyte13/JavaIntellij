@@ -1,6 +1,7 @@
 package Actividad6;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Banco {
   static ArrayList<Empleado> empleados;
@@ -27,14 +28,41 @@ public class Banco {
     return null;
   }
 
-  public static Empleado registrarEmpleado(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo){
-    Empleado empleado=Empleado.crearEmpleado(creador,nombre,apellido,dni,direccion,nroTelefono,correo,cargo);
+  // Forma genérica de buscarPersona, acepta ArrayList de sus hijas
+  public static <T extends Persona> T buscarPersona(List<T> personas, String dni) {
+    for (T p : personas) {
+      if (p.getDni().equals(dni)) {
+        return p;
+      }
+    }
+    return null;
+  }
+
+  public static Persona buscarPorDni(String dni){
+    Persona p;
+    p=buscarPersona(administradores,dni);
+    if(verificarPersona(p)){
+      return p;
+    }
+    p=buscarPersona(empleados,dni);
+    if(verificarPersona(p)){
+      return p;
+    }
+    p=buscarPersona(clientes,dni);
+    if(verificarPersona(p)){
+      return p;
+    }
+    return null;
+  }
+
+  public static Empleado registrarEmpleado(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo,String contrasena){
+    Empleado empleado=Empleado.crearEmpleado(creador,nombre,apellido,dni,direccion,nroTelefono,correo,cargo,contrasena);
     agregarEmpleado(empleado);
     return empleado;
   }
 
-  public static Cliente registrarClientes(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    Cliente cliente=Cliente.crearCliente(creador,nombre,apellido,dni, direccion, nroTelefono,correo);
+  public static Cliente registrarCliente(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena){
+    Cliente cliente=Cliente.crearCliente(creador,nombre,apellido,dni, direccion, nroTelefono,correo,contrasena);
     agregarCliente(cliente);
     return cliente;
   }
@@ -96,6 +124,9 @@ public class Banco {
   }
   public static boolean verificarTransaccion(Transaccion transaccion){
     return transaccion!=null;
+  }
+  public static boolean verificarPersona(Persona persona){
+    return persona!=null;
   }
 
 

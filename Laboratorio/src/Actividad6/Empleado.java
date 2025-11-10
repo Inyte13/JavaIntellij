@@ -7,19 +7,19 @@ public class Empleado extends Persona{
   private TipoCargo cargo;
   private Persona creador;
 
-  private Empleado(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo) {
-    super(nombre, apellido, dni, direccion, nroTelefono, correo);
+  private Empleado(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo,String contrasena) {
+    super(nombre, apellido, dni, direccion, nroTelefono, correo,contrasena);
     this.cargo = cargo;
     this.creador = creador;
   }
   // Constructor controlado
-  static Empleado crearEmpleado(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo){
-    return new Empleado(creador,nombre,apellido,dni,direccion,nroTelefono,correo,cargo);
+  static Empleado crearEmpleado(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo,String contrasena){
+    return new Empleado(creador,nombre,apellido,dni,direccion,nroTelefono,correo,cargo,contrasena);
   }
 
 
-  public Cliente registrarClientes(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    return Banco.registrarClientes(this,nombre,apellido,dni,direccion,nroTelefono,correo);
+  public Cliente registrarCliente(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena){
+    return Banco.registrarCliente(this,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
   }
 
   public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){

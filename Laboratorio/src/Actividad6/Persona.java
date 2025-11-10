@@ -8,9 +8,10 @@ public abstract class Persona {
   private String nroTelefono;
   private String correo;
   private String idPersona;
+  private String contrasena;
   private static int count=0;
 
-  public Persona(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
+  public Persona(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena) {
     this.nombre = nombre;
     this.apellido = apellido;
     this.dni = dni;
@@ -19,6 +20,7 @@ public abstract class Persona {
     this.correo = correo;
     count++;
     this.idPersona = "P-"+count;
+    this.contrasena=contrasena;
   }
 
   public String getNombre() {
@@ -27,6 +29,14 @@ public abstract class Persona {
 
   public String getApellido() {
     return apellido;
+  }
+
+  public String getDni() {
+    return dni;
+  }
+
+  public String getContrasena() {
+    return contrasena;
   }
 
   public String mostrarPersona() {

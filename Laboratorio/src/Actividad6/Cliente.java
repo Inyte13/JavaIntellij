@@ -7,14 +7,14 @@ public class Cliente extends Persona{
   private Persona creador;
   private ArrayList<ClienteCuenta> clienteCuentas;
 
-  private Cliente(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo) {
-    super(nombre, apellido, dni, direccion, nroTelefono, correo);
+  private Cliente(Persona creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena) {
+    super(nombre, apellido, dni, direccion, nroTelefono, correo,contrasena);
     this.creador=creador;
     this.clienteCuentas = new ArrayList<>();
   }
 
-  static Cliente crearCliente(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo){
-    return new Cliente(creador,nombre,apellido, dni, direccion, nroTelefono, correo);
+  static Cliente crearCliente(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena){
+    return new Cliente(creador,nombre,apellido, dni, direccion, nroTelefono, correo,contrasena);
   }
 
   public Cuenta registrarCuenta(TipoCuenta tipoCuenta){
