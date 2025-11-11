@@ -17,6 +17,7 @@ public class Banco {
     administradores=new ArrayList<>();
     clienteCuentas=new ArrayList<>();
     cuentas=new ArrayList<>();
+    transacciones=new ArrayList<>();
   }
   // Buscar la cuenta por número de cuenta, solo clientes
   public Cuenta buscarCuentaPorNumeroCuenta(ArrayList<ClienteCuenta> clienteCuentas, String numeroCuenta) {
@@ -28,6 +29,14 @@ public class Banco {
     return null;
   }
   //  la cuenta del arr de cuentas, si existe la devolvemos si no retornamos null
+  public Cuenta buscarCuentaPorNumeroCuenta2(ArrayList<Cuenta> cuentas, String numeroCuenta) {
+    for (Cuenta cuenta : cuentas) {
+      if (cuenta.getNumeroCuenta().equals(numeroCuenta)) {
+        return cuenta;
+      }
+    }
+    return null;
+  }
 
   // Forma genérica de saber si existe una persona, si es así la devuelve, sino null
   private static <T extends Persona> T existePersonaPorDni(List<T> personas, String dni) {
@@ -85,8 +94,8 @@ public class Banco {
     return null;
   }
   // Forma de buscar cliente por dni
-  public Persona buscarClientePorDni1(String dni){
-    Persona clienteBuscado= existePersonaPorDni(this.getClientes(),dni);
+  public Cliente buscarClientePorDni1(String dni){
+    Cliente clienteBuscado= existePersonaPorDni(this.getClientes(),dni);
     if(clienteBuscado!=null){
       return clienteBuscado;
     }
@@ -221,12 +230,27 @@ public class Banco {
     throw new TipoCargoInvalidoException("Cargo inválido");
   }
 
+  public void validarTipoCuenta(String tipoCuenta) throws TipoCuentaInvalidoException {
+    for(TipoCuenta t:TipoCuenta.values()){
+      if( t.name().equalsIgnoreCase(tipoCuenta)){
+        return;
+      }
+    }
+    throw new TipoCuentaInvalidoException("Tipo de cuenta inválida");
+  }
+
   public void validarNroCuenta(String nroCuenta) throws NroDeCuentaInvalidoException, NroDeCuentaNoEncontradoException {
     if(!nroCuenta.matches("^\\d{6}$")){
       throw new NroDeCuentaInvalidoException("Número de cuenta inválido");
     }
     if(this.buscarCuentaPorNumeroCuenta(this.getClienteCuentas(),nroCuenta)==null){
       throw new NroDeCuentaNoEncontradoException("Número de cuenta no encontrado");
+    }
+  }
+
+  public void validarNroCuentaDiferente(String nroCuenta,Cuenta cuenta) throws NroDeCuentaIgualesException {
+    if(cuenta.getNumeroCuenta().equals(nroCuenta)){
+      throw new NroDeCuentaIgualesException("No puedes transferir a tu propia cuenta");
     }
   }
 
@@ -290,6 +314,7 @@ public class Banco {
     agregarCuenta(cuenta);
     return cuenta;
   }
+
   public Cuenta registrarCuenta(Persona creador,Cliente cliente,TipoCuenta tipoCuenta,double saldo){
     Cuenta cuenta=Cuenta.crearCuenta(creador,tipoCuenta,saldo);
     ClienteCuenta cc=ClienteCuenta.crearClienteCuenta(creador,cliente,cuenta);
@@ -298,46 +323,30 @@ public class Banco {
     return cuenta;
   }
 
+
   public ClienteCuenta vincularClienteACuenta(Persona creador,Cliente solicitante, Cliente nuevoTitular,Cuenta cuenta){
     if(cuenta!=null&&nuevoTitular.buscarCuenta(cuenta.getNumeroCuenta())==null){
       return ClienteCuenta.crearClienteCuenta(creador,nuevoTitular,cuenta);
     }
     return null;
   }
-//
-//  public Transaccion registrarRetiro(Persona creador,Cuenta cuenta,double monto){
-//    Transaccion transaccion=cuenta.retirar(creador,monto);
-//    if(verificarTransaccion(transaccion)){
-//      transacciones.add(transaccion);
-//    }
-//    return transaccion;
-//  }
-//  public Transaccion registrarDeposito(Persona creador,Cuenta cuenta,double monto){
-//    Transaccion transaccion=cuenta.deposito(creador,monto);
-//    if(verificarTransaccion(transaccion)){
-//      transacciones.add(transaccion);
-//    }
-//    return transaccion;
-//  }
-//
-//  public Transaccion registrarTransferencia(Persona creador,String nroCuentaEmisor,double monto,String nroCuentaReceptor){
-//    Cuenta cuentaEmisor=buscarCuentaPorCliente(clienteCuentas,nroCuentaEmisor);
-//    Cuenta cuentaReceptor=buscarCuentaPorCliente(clienteCuentas,nroCuentaReceptor);
-//    if(!verificarCuenta(cuentaEmisor)||!verificarCuenta(cuentaReceptor)){
-//      return null;
-//    }
-//    Transaccion transaccion=cuentaEmisor.transferencia(creador,monto,cuentaReceptor);
-//    if(verificarTransaccion(transaccion)){
-//      transacciones.add(transaccion);
-//    }
-//    return transaccion;
-//  }
 
+  public Transaccion registrarRetiro(Persona creador,Cuenta cuenta,double monto){
+    Transaccion transaccion=cuenta.retirar(creador,monto);
+    this.anadirTransaccion(transaccion);
+    return transaccion;
+  }
+  public Transaccion registrarDeposito(Persona creador,Cuenta cuenta,double monto){
+    Transaccion transaccion=cuenta.deposito(creador,monto);
+    this.anadirTransaccion(transaccion);
+    return transaccion;
+  }
 
-
-
-
-
+  public Transaccion registrarTransferencia(Persona creador,Cuenta cuenta1,double monto,Cuenta cuenta2){
+    Transaccion transaccion=cuenta1.transferencia(creador,monto,cuenta2);
+    this.anadirTransaccion(transaccion);
+    return transaccion;
+  }
 
   public void agregarAdmin(Administrador admin){
     administradores.add(admin);
@@ -359,6 +368,10 @@ public class Banco {
     cuentas.add(cuenta);
   }
 
+  public void anadirTransaccion(Transaccion transaccion){
+    this.transacciones.add(transaccion);
+  }
+
   public void mostrarAdmins(){
     administradores.forEach(a-> System.out.println(a.mostrarAdmin()));
   }
@@ -374,9 +387,4 @@ public class Banco {
   public void mostrarCuentas(){
     cuentas.forEach(cuenta-> System.out.println(cuenta.mostrarCuenta()));
   }
-  public void mostrarCuentasPorCliente(){
-
-  }
-
-
 }

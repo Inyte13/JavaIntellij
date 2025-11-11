@@ -20,16 +20,17 @@ public class Main {
     Cliente cl2=admin1.registrarCliente(banco,"Estrella","Juarez","48992838","382","938382839","ejuarez@unsa.edu.pe","894k3sjfkd");
 
     // Registrando cuentas
-    emp1.registrarCuenta(banco,cl1,TipoCuenta.AHORRO,32_894.2);
-    admin2.registrarCuenta(banco,cl2,TipoCuenta.CORRIENTE);
-    banco.mostrarCuentas();
+    Cuenta cuenta1=emp1.registrarCuenta(banco,cl1,TipoCuenta.AHORRO,32_894.2);
+    Cuenta cuenta2=admin2.registrarCuenta(banco,cl2,TipoCuenta.CORRIENTE);
 
     // Añadiendo titulares a una cuenta
-//    admin1.vincularClienteACuenta(cl1,cl2,"000001");
-
+    admin1.vincularClienteACuenta(banco,cl1,cl2,cuenta1);
+    banco.mostrarCuentas();
     Persona persona=menu.login();
-    if (persona instanceof Submenu usuario) {
+    if (persona instanceof SubmenuPersona usuario) {
       usuario.submenu(banco,menu,persona);
     }
+    cuenta2.mostrarMovimientos();
+    System.out.println(cuenta2.mostrarCuenta());
   }
 }

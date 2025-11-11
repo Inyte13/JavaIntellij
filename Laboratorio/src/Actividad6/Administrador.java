@@ -1,9 +1,8 @@
 package Actividad6;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Administrador extends Persona implements Submenu{
+public class Administrador extends Persona implements SubmenuPersona {
 
   private Administrador creador;
 
@@ -41,12 +40,13 @@ public class Administrador extends Persona implements Submenu{
           "\t1) Registrar administrador\n" +
           "\t2) Registrar empleado\n" +
           "\t3) Registrar cliente\n" +
-          "\t4) Añadir titular a una cuenta\n" +
-          "\t5) Buscar cuenta\n" +
-          "\t6) Buscar persona\n" +
-          "\t7) Mostrar todas las cuentas\n" +
-          "\t8) Mostrar todos los usuarios\n" +
-          "\t9) Salir");
+          "\t4) Registrar cuenta\n" +
+          "\t5) Añadir titular a una cuenta\n" +
+          "\t6) Buscar cuenta\n" +
+          "\t7) Buscar persona\n" +
+          "\t8) Mostrar todas las cuentas\n" +
+          "\t9) Mostrar todos los usuarios\n" +
+          "\t10) Salir");
       opcion=teclado.nextInt();
       switch (opcion) {
         case 1:
@@ -62,6 +62,10 @@ public class Administrador extends Persona implements Submenu{
           System.out.println(registrarCliente(banco,menu.pedirNombre(),menu.pedirApellido(),menu.pedirDni("Ingrese su DNI: "),menu.pedirDireccion(),menu.pedirNroTelefono(),menu.pedirCorreo(),menu.pedirContrasena()).mostrarCliente());
           break;
         case 4:
+          Cliente cliente=banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del cliente: "));
+          System.out.println(administrador.registrarCuenta(banco,cliente,menu.pedirTipoCuenta()).mostrarCuenta());
+          break;
+        case 5:
           Cliente cliente1=(Cliente)banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del solicitante: "));
           Cliente cliente2;
           boolean esValido=false;
@@ -78,10 +82,10 @@ public class Administrador extends Persona implements Submenu{
           administrador.vincularClienteACuenta(banco,cliente1,cliente2,cuenta);
           System.out.println(cuenta.mostrarCuenta());
           break;
-        case 5:
+        case 6:
           System.out.println(banco.buscarCuentaPorNumeroCuenta(banco.getClienteCuentas(),menu.pedirNroDeCuenta()).mostrarCuenta());
           break;
-        case 6:
+        case 7:
           Persona p = banco.buscarPersonaPorDni3(menu.buscarDni("Ingrese su DNI: "));
           if (p instanceof Administrador) {
             Administrador admin = (Administrador) p;
@@ -94,10 +98,10 @@ public class Administrador extends Persona implements Submenu{
             System.out.println(cli.mostrarCliente());
           }
           break;
-        case 7:
+        case 8:
           banco.mostrarCuentas();
           break;
-        case 8:
+        case 9:
           System.out.println("-------------------");
           System.out.println("Administradores");
           banco.mostrarAdmins();
@@ -108,12 +112,12 @@ public class Administrador extends Persona implements Submenu{
           System.out.println("Clientes");
           banco.mostrarClientes();
           break;
-        case 9:
+        case 10:
           break;
         default:
-          System.out.println("El número es inválido (1-9)");
+          System.out.println("El número es inválido (1-10)");
       }
-    }while(opcion!=9);
+    }while(opcion!=10);
   }
 
   public Empleado registrarEmpleado(Banco banco, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo, String contrasena){

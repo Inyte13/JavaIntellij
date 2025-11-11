@@ -1,5 +1,6 @@
 package Actividad6;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -218,6 +219,33 @@ public class Menu {
     return tipoCargo;
   }
 
+  public TipoCuenta pedirTipoCuenta() {
+    Scanner teclado = new Scanner(System.in);
+    TipoCuenta tipoCargo = null;
+    boolean cuentaValida = false;
+    do {
+      System.out.print("Ingrese su tipo de cuenta (");
+      TipoCuenta[] tipo = TipoCuenta.values();
+      for (int i = 0; i < tipo.length; i++) {
+        System.out.print(tipo[i].name());
+        if (i < tipo.length - 1) {
+          System.out.print(", ");
+        }
+      }
+      System.out.print("): ");
+
+      String input = teclado.next();
+      try {
+        banco.validarTipoCuenta(input);
+        tipoCargo = TipoCuenta.valueOf(input.toUpperCase());
+        cuentaValida = true;
+      } catch (TipoCuentaInvalidoException e) {
+        System.out.println(e.getMessage());
+      }
+    } while (!cuentaValida);
+    return tipoCargo;
+  }
+
   public String pedirNroDeCuenta(){
     Scanner teclado=new Scanner(System.in);
     String nroDeCuenta;
@@ -251,6 +279,68 @@ public class Menu {
     }while(!nroDeCuentaValido);
     return nroDeCuenta;
   }
+
+  public String pedirNroDeCuentaDiferente(Cuenta cuenta){
+    Scanner teclado=new Scanner(System.in);
+    String nroDeCuenta;
+    boolean nroDeCuentaValido=false;
+    do{
+      System.out.print("Ingrese el número de cuenta de destino: ");
+      nroDeCuenta=teclado.next();
+      try{
+        banco.validarNroCuentaDiferente(nroDeCuenta,cuenta);
+        banco.validarNroCuenta(nroDeCuenta);
+        nroDeCuentaValido=true;
+      }catch (NroDeCuentaIgualesException|NroDeCuentaInvalidoException|NroDeCuentaNoEncontradoException e){
+        System.out.println(e.getMessage());
+      }
+    }while(!nroDeCuentaValido);
+    return nroDeCuenta;
+  }
+
+  public double pedirMontoRetiro(Cuenta cuenta){
+    Scanner teclado=new Scanner(System.in);
+    double monto=0;
+    boolean montoValido=false;
+    do{
+      System.out.print("Ingrese el monto: ");
+      try {
+        monto=teclado.nextDouble();
+        cuenta.validarMontoRetiro(monto);
+        montoValido = true;
+      }catch(InputMismatchException e){
+        System.out.println("Debe ingresar un número válido");
+        teclado.next();
+      }catch (MontoInvalidoException|SaldoInsuficienteException e){
+        System.out.println(e.getMessage());
+      }
+    }while(!montoValido);
+    return monto;
+  }
+
+  public double pedirMontoDeposito(Cuenta cuenta){
+    Scanner teclado=new Scanner(System.in);
+    double monto=0;
+    boolean montoValido=false;
+    do{
+      System.out.print("Ingrese el monto: ");
+      try {
+      monto=teclado.nextDouble();
+        cuenta.validarMontoDeposito(monto);
+        montoValido = true;
+      }catch(InputMismatchException e){
+        System.out.println("Debe ingresar un número válido");
+        teclado.next();
+      }catch (MontoInvalidoException e){
+        System.out.println(e.getMessage());
+      }
+    }while(!montoValido);
+    return monto;
+  }
+
+
+
+
 
 
 

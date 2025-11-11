@@ -1,5 +1,5 @@
 package Actividad6;
 
-public interface Submenu {
+public interface SubmenuPersona {
   void submenu(Banco banco, Menu menu, Persona persona);
 }

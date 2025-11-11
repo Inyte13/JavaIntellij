@@ -2,8 +2,9 @@ package Actividad6;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Cuenta {
+public class Cuenta implements SubmenuCuenta {
   private TipoCuenta tipoCuenta;
   private double saldo;
   private String numeroCuenta;
@@ -35,18 +36,71 @@ public class Cuenta {
     this.creador=creador;
   }
 
-
   static Cuenta crearCuenta(Persona creador,TipoCuenta tipoCuenta){
     return new Cuenta(creador,tipoCuenta);
   }
+
   static Cuenta crearCuenta(Persona creador,TipoCuenta tipoCuenta, double saldo){
     return new Cuenta(creador,tipoCuenta,saldo);
   }
 
-  public Transaccion retirar(Persona creador,double monto){
-    if (monto <= 0 || monto > saldo){
-      return null;
+  @Override
+  public void submenu(Banco banco, Menu menu, Persona persona,Cuenta cuenta) {
+    Scanner teclado=new Scanner(System.in);
+    Cliente cliente=(Cliente) persona;
+    int opcion;
+    do{
+      System.out.println("-------------------");
+      System.out.println("Elija una de las siguientes opciones:\n" +
+          "\t1) Retirar\n" +
+          "\t2) Depositar\n" +
+          "\t3) Transferencia\n" +
+          "\t4) Mostrar movimientos\n" +
+          "\t5) Mostrar cuenta\n" +
+          "\t6) Volver");
+      opcion=teclado.nextInt();
+      switch (opcion) {
+        case 1:
+          System.out.println(banco.registrarRetiro(cliente,cuenta,menu.pedirMontoRetiro(cuenta)).mostrarTransaccion());
+          break;
+        case 2:
+          System.out.println(banco.registrarDeposito(cliente,cuenta,menu.pedirMontoDeposito(cuenta)).mostrarTransaccion());
+          break;
+        case 3:
+          System.out.println(banco.registrarTransferencia(cliente,cuenta, menu.pedirMontoRetiro(cuenta), banco.buscarCuentaPorNumeroCuenta(banco.getClienteCuentas(),menu.pedirNroDeCuentaDiferente(cuenta))).mostrarTransaccion());
+          break;
+        case 4:
+          cuenta.mostrarMovimientos();
+          break;
+        case 5:
+          System.out.println(cuenta.mostrarCuenta());
+          break;
+        case 6:
+          break;
+        default:
+          System.out.println("El número es inválido (1-6)");
+      }
+    }while(opcion!=6);
+
+
+  }
+
+  public void validarMontoRetiro(double monto)throws MontoInvalidoException,SaldoInsuficienteException{
+    if(monto<=0){
+      throw new MontoInvalidoException("El monto debe ser mayor que 0");
     }
+    if(monto>saldo){
+      throw new SaldoInsuficienteException("Saldo insuficiente");
+    }
+  }
+
+  public void validarMontoDeposito(double monto)throws MontoInvalidoException{
+    if(monto<=0){
+      throw new MontoInvalidoException("El monto debe ser mayor que 0");
+    }
+  }
+
+  public Transaccion retirar(Persona creador, double monto){
     saldo -= monto;
     Transaccion transaccion=Transaccion.crearTransaccion(creador,TipoTransaccion.RETIRO,monto);
     anadirTransaccion(transaccion);
@@ -54,9 +108,6 @@ public class Cuenta {
   }
 
   public Transaccion deposito(Persona creador,double monto){
-    if (monto <= 0){
-      return null;
-    }
     saldo += monto;
     Transaccion transaccion=Transaccion.crearTransaccion(creador,TipoTransaccion.DEPOSITO,monto);
     anadirTransaccion(transaccion);
@@ -64,9 +115,6 @@ public class Cuenta {
   }
 
   public Transaccion transferencia(Persona creador,double monto,Cuenta cuenta){
-    if (monto <= 0|| monto > saldo){
-      return null;
-    }
     saldo -= monto;
     Transaccion transaccion=Transaccion.crearTransaccion(creador,TipoTransaccion.TRANSFERENCIA,monto);
     anadirTransaccion(transaccion);
@@ -75,7 +123,6 @@ public class Cuenta {
     return transaccion;
   }
 
-
   private void anadirTransaccion(Transaccion transaccion){
     this.transacciones.add(transaccion);
   }
@@ -83,9 +130,10 @@ public class Cuenta {
   public void mostrarMovimientos(){
     System.out.println("Movimientos de la cuenta "+numeroCuenta+": ");
     for(Transaccion transaccion:transacciones){
-      System.out.println(transaccion);
+      System.out.println(transaccion.mostrarTransaccion());
     }
   }
+
   public ArrayList<String> getTitulares(){
     ArrayList<String> titulares=new ArrayList<>();
     for(ClienteCuenta clienteCuenta: clienteCuentas){

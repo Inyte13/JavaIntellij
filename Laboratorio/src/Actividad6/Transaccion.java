@@ -25,14 +25,14 @@ public class Transaccion {
   }
 
 
-  @Override
-  public String toString() {
-    return "Transaccion{" +
-        "numeroTransaccion='" + numeroTransaccion + '\'' +
-        ", fechaTransaccion=" + fechaTransaccion +
-        ", tipoTransaccion=" + tipoTransaccion +
-        ", monto=" + monto +
-        '}';
+  public String mostrarTransaccion() {
+    String infoCreador=(creador==null) ? "SuperAdmin (sin creador)" : creador.getNombre()+" "+creador.getApellido();
+    return "-------------------\n" +
+        "Número de transacción: "+numeroTransaccion+"\n" +
+        "Fecha: "+fechaTransaccion+"\n" +
+        "Tipo: "+tipoTransaccion+"\n" +
+        "Monto: "+monto+"\n" +
+        "Registrador por: " + infoCreador;
   }
 }
 
