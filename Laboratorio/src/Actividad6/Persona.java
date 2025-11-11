@@ -39,6 +39,14 @@ public abstract class Persona {
     return contrasena;
   }
 
+  public String getNroTelefono() {
+    return nroTelefono;
+  }
+
+  public String getCorreo() {
+    return correo;
+  }
+
   public String mostrarPersona() {
     return "-------------------\n" +
         "Nombre: "+nombre+"\n" +

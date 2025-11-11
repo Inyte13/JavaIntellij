@@ -1,8 +1,9 @@
 package Actividad6;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Administrador extends Persona{
+public class Administrador extends Persona implements Submenu{
 
   private Administrador creador;
 
@@ -29,35 +30,110 @@ public class Administrador extends Persona{
     return admin;
   }
 
-
-  public Empleado registrarEmpleado(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo,String contrasena){
-   return Banco.registrarEmpleado(this,nombre,apellido,dni,direccion,nroTelefono,correo,cargo,contrasena);
+  @Override
+  public void submenu(Banco banco, Menu menu,Persona persona) {
+    Scanner teclado=new Scanner(System.in);
+    Administrador administrador=(Administrador)persona;
+    int opcion;
+    do{
+      System.out.println("-------------------");
+      System.out.println("Elija una de las siguientes opciones:\n" +
+          "\t1) Registrar administrador\n" +
+          "\t2) Registrar empleado\n" +
+          "\t3) Registrar cliente\n" +
+          "\t4) Añadir titular a una cuenta\n" +
+          "\t5) Buscar cuenta\n" +
+          "\t6) Buscar persona\n" +
+          "\t7) Mostrar todas las cuentas\n" +
+          "\t8) Mostrar todos los usuarios\n" +
+          "\t9) Salir");
+      opcion=teclado.nextInt();
+      switch (opcion) {
+        case 1:
+          System.out.println("---------Registrando administrador---------");
+          System.out.println(registrarAdmin(banco,menu.pedirNombre(),menu.pedirApellido(),menu.pedirDni("Ingrese su DNI: "),menu.pedirDireccion(),menu.pedirNroTelefono(),menu.pedirCorreo(),menu.pedirContrasena()).mostrarAdmin());
+          break;
+        case 2:
+          System.out.println("---------Registrando empleado---------");
+          System.out.println(registrarEmpleado(banco,menu.pedirNombre(),menu.pedirApellido(),menu.pedirDni("Ingrese su DNI: "),menu.pedirDireccion(),menu.pedirNroTelefono(),menu.pedirCorreo(),menu.pedirTipoCargo(),menu.pedirContrasena()).mostrarEmpleado());
+          break;
+        case 3:
+          System.out.println("---------Registrando cliente---------");
+          System.out.println(registrarCliente(banco,menu.pedirNombre(),menu.pedirApellido(),menu.pedirDni("Ingrese su DNI: "),menu.pedirDireccion(),menu.pedirNroTelefono(),menu.pedirCorreo(),menu.pedirContrasena()).mostrarCliente());
+          break;
+        case 4:
+          Cliente cliente1=(Cliente)banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del solicitante: "));
+          Cliente cliente2;
+          boolean esValido=false;
+          do{
+            cliente2=(Cliente)banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del nuevo titular: "));
+            try{
+              banco.validarDiferenciaDeClientes(cliente1,cliente2);
+              esValido=true;
+            }catch (ClientesIgualesException e){
+              System.out.println(e.getMessage());
+            }
+          }while(!esValido);
+          Cuenta cuenta=cliente1.buscarCuenta(menu.pedirNroDeCuentaDeCliente(cliente1));
+          administrador.vincularClienteACuenta(banco,cliente1,cliente2,cuenta);
+          System.out.println(cuenta.mostrarCuenta());
+          break;
+        case 5:
+          System.out.println(banco.buscarCuentaPorNumeroCuenta(banco.getClienteCuentas(),menu.pedirNroDeCuenta()).mostrarCuenta());
+          break;
+        case 6:
+          Persona p = banco.buscarPersonaPorDni3(menu.buscarDni("Ingrese su DNI: "));
+          if (p instanceof Administrador) {
+            Administrador admin = (Administrador) p;
+            System.out.println(admin.mostrarAdmin());
+          } else if (p instanceof Empleado) {
+            Empleado emp = (Empleado) p;
+            System.out.println(emp.mostrarEmpleado());
+          } else if (p instanceof Cliente) {
+            Cliente cli = (Cliente) p;
+            System.out.println(cli.mostrarCliente());
+          }
+          break;
+        case 7:
+          banco.mostrarCuentas();
+          break;
+        case 8:
+          System.out.println("-------------------");
+          System.out.println("Administradores");
+          banco.mostrarAdmins();
+          System.out.println("-------------------");
+          System.out.println("Empleados");
+          banco.mostrarEmpleados();
+          System.out.println("-------------------");
+          System.out.println("Clientes");
+          banco.mostrarClientes();
+          break;
+        case 9:
+          break;
+        default:
+          System.out.println("El número es inválido (1-9)");
+      }
+    }while(opcion!=9);
   }
 
-  public Cliente registrarCliente(String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena){
-    return Banco.registrarCliente(this,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
+  public Empleado registrarEmpleado(Banco banco, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo, String contrasena){
+   return banco.registrarEmpleado(this,nombre,apellido,dni,direccion,nroTelefono,correo,cargo,contrasena);
   }
 
-  public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta){
-    return Banco.registrarCuenta(this,cliente,tipoCuenta);
+  public Cliente registrarCliente(Banco banco,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo,String contrasena){
+    return banco.registrarCliente(this,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
   }
 
-  public Cuenta registrarCuenta(Cliente cliente,TipoCuenta tipoCuenta,double saldo){
-    return Banco.registrarCuenta(this,cliente,tipoCuenta,saldo);
+  public Cuenta registrarCuenta(Banco banco,Cliente cliente,TipoCuenta tipoCuenta){
+    return banco.registrarCuenta(this,cliente,tipoCuenta);
   }
 
-  public ClienteCuenta vincularClienteACuenta(Cliente solicitante, Cliente nuevoTitular, String numeroCuenta){
-    return Banco.vincularClienteACuenta(this,solicitante,nuevoTitular,numeroCuenta);
+  public Cuenta registrarCuenta(Banco banco,Cliente cliente,TipoCuenta tipoCuenta,double saldo){
+    return banco.registrarCuenta(this,cliente,tipoCuenta,saldo);
   }
 
-
-
-
-
-
-
-  public Cuenta buscarCuenta(ArrayList<ClienteCuenta> cuentas, String numeroCuenta){
-    return Banco.buscarCuenta(cuentas,numeroCuenta);
+  public ClienteCuenta vincularClienteACuenta(Banco banco,Cliente solicitante, Cliente nuevoTitular, Cuenta cuenta){
+    return banco.vincularClienteACuenta(this,solicitante,nuevoTitular,cuenta);
   }
 
   public Administrador getCreador() {

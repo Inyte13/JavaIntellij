@@ -2,7 +2,7 @@ package Actividad6;
 
 import java.util.ArrayList;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona implements Submenu{
 
   private Persona creador;
   private ArrayList<ClienteCuenta> clienteCuentas;
@@ -17,8 +17,13 @@ public class Cliente extends Persona{
     return new Cliente(creador,nombre,apellido, dni, direccion, nroTelefono, correo,contrasena);
   }
 
-  public Cuenta registrarCuenta(TipoCuenta tipoCuenta){
-    return Banco.registrarCuenta(this,this,tipoCuenta);
+  @Override
+  public void submenu(Banco banco, Menu menu,Persona persona) {
+
+  }
+
+  public Cuenta registrarCuenta(Banco banco, TipoCuenta tipoCuenta){
+    return banco.registrarCuenta(this,this,tipoCuenta);
   }
 
   public void mostrarCuentas(){
@@ -28,7 +33,14 @@ public class Cliente extends Persona{
   }
 
   public Cuenta buscarCuenta(String nroCuenta){
-    return Banco.buscarCuenta(this.clienteCuentas,nroCuenta);
+    Cuenta cuentaBuscada;
+    for (ClienteCuenta clienteCuenta : clienteCuentas) {
+      cuentaBuscada=clienteCuenta.getCuenta();
+      if(cuentaBuscada.getNumeroCuenta().equals(nroCuenta)){
+        return cuentaBuscada;
+      }
+    }
+    return null;
   }
 
   public String mostrarCliente() {
