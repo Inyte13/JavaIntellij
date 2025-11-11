@@ -66,11 +66,11 @@ public class Administrador extends Persona implements SubmenuPersona {
           System.out.println(administrador.registrarCuenta(banco,cliente,menu.pedirTipoCuenta()).mostrarCuenta());
           break;
         case 5:
-          Cliente cliente1=(Cliente)banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del solicitante: "));
+          Cliente cliente1=banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del solicitante: "));
           Cliente cliente2;
           boolean esValido=false;
           do{
-            cliente2=(Cliente)banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del nuevo titular: "));
+            cliente2=banco.buscarClientePorDni1(menu.pedirClientePorDni("Ingrese el DNI del nuevo titular: "));
             try{
               banco.validarDiferenciaDeClientes(cliente1,cliente2);
               esValido=true;

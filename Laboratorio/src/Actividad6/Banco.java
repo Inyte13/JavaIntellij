@@ -269,7 +269,6 @@ public class Banco {
     }
   }
 
-
   public ArrayList<Empleado> getEmpleados() {
     return empleados;
   }
@@ -285,15 +284,6 @@ public class Banco {
   public ArrayList<ClienteCuenta> getClienteCuentas() {
     return clienteCuentas;
   }
-
-  public ArrayList<Cuenta> getCuentas() {
-    return cuentas;
-  }
-
-  public ArrayList<Transaccion> getTransacciones() {
-    return transacciones;
-  }
-
 
   public Empleado registrarEmpleado(Persona creador, String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, TipoCargo cargo,String contrasena){
     Empleado empleado=Empleado.crearEmpleado(creador,nombre,apellido,dni,direccion,nroTelefono,correo,cargo,contrasena);

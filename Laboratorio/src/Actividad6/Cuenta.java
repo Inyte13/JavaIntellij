@@ -81,8 +81,6 @@ public class Cuenta implements SubmenuCuenta {
           System.out.println("El número es inválido (1-6)");
       }
     }while(opcion!=6);
-
-
   }
 
   public void validarMontoRetiro(double monto)throws MontoInvalidoException,SaldoInsuficienteException{

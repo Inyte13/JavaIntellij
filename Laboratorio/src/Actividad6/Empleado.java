@@ -107,11 +107,6 @@ public class Empleado extends Persona implements SubmenuPersona {
   public ClienteCuenta vincularClienteACuenta(Banco banco,Cliente solicitante, Cliente nuevoTitular, Cuenta cuenta){
     return banco.vincularClienteACuenta(this,solicitante,nuevoTitular,cuenta);
   }
-//
-//  public Cuenta buscarCuenta(Banco banco,ArrayList<ClienteCuenta> cuentas, String numeroCuenta){
-//    return banco.buscarCuentaPorCliente(cuentas,numeroCuenta);
-//  }
-
 
   public String mostrarEmpleado() {
     String infoCreador=(creador==null) ? "SuperAdmin (sin creador)" : creador.getNombre()+" "+creador.getApellido();
