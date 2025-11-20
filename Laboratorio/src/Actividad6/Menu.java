@@ -1,5 +1,7 @@
 package Actividad6;
 
+import Actividad6.exceptions.*;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -83,7 +85,7 @@ public class Menu {
       try{
         banco.ingresarDni(dni);
         dniValido=true;
-      }catch (DniInvalidoException|DniYaRegistradoException e){
+      }catch (DniInvalidoException | DniYaRegistradoException e){
         System.out.println(e.getMessage());
       }
     }while(!dniValido);
@@ -122,6 +124,24 @@ public class Menu {
       }
     }while(!dniValido);
     return dni;
+  }
+
+  public Cliente retornarClientePorDni(String mensaje){
+    Scanner teclado=new Scanner(System.in);
+    String dni;
+    Cliente cliente=null;
+    boolean dniValido=false;
+    do{
+      System.out.print(mensaje);
+      dni=teclado.next();
+      try{
+        cliente=banco.retornarClienteDni(dni);
+        dniValido=true;
+      }catch (DniInvalidoException|DniNoEncontradoException e){
+        System.out.println(e.getMessage());
+      }
+    }while(!dniValido);
+    return cliente;
   }
 
   public String pedirDireccion(){
@@ -256,7 +276,7 @@ public class Menu {
       try{
         banco.validarNroCuenta(nroDeCuenta);
         nroDeCuentaValido=true;
-      }catch (NroDeCuentaNoEncontradoException|NroDeCuentaInvalidoException e){
+      }catch (NroDeCuentaNoEncontradoException | NroDeCuentaInvalidoException e){
         System.out.println(e.getMessage());
       }
     }while(!nroDeCuentaValido);
@@ -291,7 +311,7 @@ public class Menu {
         banco.validarNroCuentaDiferente(nroDeCuenta,cuenta);
         banco.validarNroCuenta(nroDeCuenta);
         nroDeCuentaValido=true;
-      }catch (NroDeCuentaIgualesException|NroDeCuentaInvalidoException|NroDeCuentaNoEncontradoException e){
+      }catch (NroDeCuentaIgualesException | NroDeCuentaInvalidoException | NroDeCuentaNoEncontradoException e){
         System.out.println(e.getMessage());
       }
     }while(!nroDeCuentaValido);

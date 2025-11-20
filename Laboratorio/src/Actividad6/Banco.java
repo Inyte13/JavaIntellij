@@ -1,5 +1,7 @@
 package Actividad6;
 
+import Actividad6.exceptions.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,8 +165,18 @@ public class Banco {
       throw new DniNoEncontradoException("DNI no encontrado");
     }
   }
+  public Cliente retornarClienteDni(String dni) throws DniInvalidoException, DniNoEncontradoException {
+    if(!dni.matches("\\d{8}")){
+      throw new DniInvalidoException("DNI inválido");
+    }
+    Cliente cliente=this.buscarClientePorDni1(dni);
+    if(cliente==null){
+      throw new DniNoEncontradoException("DNI no encontrado");
+    }
+    return cliente;
+  }
 
-  public void ingresarDni(String dni) throws DniInvalidoException,DniYaRegistradoException{
+  public void ingresarDni(String dni) throws DniInvalidoException, DniYaRegistradoException {
     if(!dni.matches("\\d{8}")) {
       throw new DniInvalidoException("DNI inválido");
     }
@@ -179,7 +191,7 @@ public class Banco {
     }
   }
 
-  public void validarNroTelefono(String nroTelefono) throws NroTelefonoInvalidoException,NroTelefonoNoEncontradoException{
+  public void validarNroTelefono(String nroTelefono) throws NroTelefonoInvalidoException, NroTelefonoNoEncontradoException {
     if(!nroTelefono.matches("^9\\d{8}$")){
       throw new NroTelefonoInvalidoException("Número de télefono inválido");
     }
