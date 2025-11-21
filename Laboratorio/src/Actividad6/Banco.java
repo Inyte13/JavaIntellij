@@ -1,7 +1,6 @@
 package Actividad6;
 
 import Actividad6.exceptions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

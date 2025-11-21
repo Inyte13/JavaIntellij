@@ -1,7 +1,6 @@
 package Actividad6;
 
 import Actividad6.exceptions.ClientesIgualesException;
-
 import java.util.Scanner;
 
 public class Empleado extends Persona implements SubmenuPersona {
@@ -120,5 +119,4 @@ public class Empleado extends Persona implements SubmenuPersona {
     String infoCreador=(creador==null) ? "SuperAdmin (sin creador)" : creador.getNombre()+" "+creador.getApellido();
     return super.mostrarPersona()+"Cargo: "+cargo+"\nRegistrado por: "+ infoCreador;
   }
-
 }

@@ -143,8 +143,6 @@ public class Cuenta implements SubmenuCuenta {
     return titulares;
   }
 
-
-
   public String getNumeroCuenta() {
     return numeroCuenta;
   }
