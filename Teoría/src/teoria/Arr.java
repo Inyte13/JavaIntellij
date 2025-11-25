@@ -1,8 +1,6 @@
 package teoria;
 
-import java.util.*;
-
-public class _List_ {
+public class Arr {
 			
 	public static void main(String[] args) {
 		int listCeros[]=new int[10]; // Crea una lista con 10 "0"

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class _ArrayList_ {
+public class List {
 	
 	public static void main(String[] args) {
     ArrayList<String> nombres = new ArrayList<>(8);
@@ -18,7 +18,9 @@ public class _ArrayList_ {
     numeros.size(); // Devuelve el tamaño del ArrayList
     numeros.contains(2); // El value 2 se encuentra en el ArrayList?
     numeros.indexOf(9); // Busca el value 9, devuelve el index si lo encuentra
-    numeros.lastIndexOf(9); // Busca el value 9 desde atrás, devuelve el index si lo encuentra+
+    numeros.lastIndexOf(9); // Busca el value 9 desde atrás, devuelve el index si lo encuentra
+    numeros.isEmpty(); // Nos dice si está vacía
+    // numeros.isNotEmpty(); NO EXISTE
     ArrayList<Integer> copia = new ArrayList<>(numeros); // Copiar el ArrayList
     Collections.sort(numeros2); // Ordenar ASC
     Collections.reverse(numeros2); // Invertir el Orden
