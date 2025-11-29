@@ -1,0 +1,5 @@
+package com.inyte.banco.models;
+
+public enum TipoCargo {
+  ASESOR_CLIENTE,EJECUTIVO_CUENTAS,ASESOR_FINANCIERO,GESTOR_COMERCIAL,ANALISTA_CREDITO
+}
