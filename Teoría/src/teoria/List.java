@@ -8,7 +8,7 @@ public class List {
 	
 	public static void main(String[] args) {
     ArrayList<String> nombres = new ArrayList<>(8);
-    ArrayList<Integer> numeros = new ArrayList<>(Collections.nCopies(10, 0)); // Crea un ArrayList de size 10 y values de 0
+    ArrayList<Integer> numeros = new ArrayList<>(Collections.nCopies(10, 0)); // C  rea un ArrayList de size 10 y values de 0
     ArrayList<Integer> numeros2 = new ArrayList<>(Arrays.asList(3, 4, 5, 5, 63, 23));
     numeros.add(1); // Inserta el value de 1 al final de la cola
     numeros.add(0, 99); // Inserta el value de 99 en el index 0

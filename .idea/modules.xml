@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Algoritmos/Algoritmos.iml" filepath="$PROJECT_DIR$/Algoritmos/Algoritmos.iml" />
       <module fileurl="file://$PROJECT_DIR$/CajeroAutomatico/CajeroAutomatico.iml" filepath="$PROJECT_DIR$/CajeroAutomatico/CajeroAutomatico.iml" />
       <module fileurl="file://$PROJECT_DIR$/Calculadora/Calculadora.iml" filepath="$PROJECT_DIR$/Calculadora/Calculadora.iml" />
       <module fileurl="file://$PROJECT_DIR$/ClassAbstract/ClassAbstract.iml" filepath="$PROJECT_DIR$/ClassAbstract/ClassAbstract.iml" />

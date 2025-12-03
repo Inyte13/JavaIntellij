@@ -11,6 +11,7 @@ public class Administrador extends Persona implements SubmenuPersona {
 
   private Administrador creador;
 
+  // Constructor privado
   private Administrador(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena) {
     super(nombre, apellido, dni, direccion, nroTelefono, correo, contrasena);
     this.creador = creador;
@@ -23,7 +24,7 @@ public class Administrador extends Persona implements SubmenuPersona {
     return admin;
   }
 
-  // Constructor controlado
+  // Solo un admin puede crear a otro admin
   private static Administrador crearAdmin(Administrador creador,String nombre, String apellido, String dni, String direccion, String nroTelefono, String correo, String contrasena){
     return new Administrador(creador,nombre,apellido,dni,direccion,nroTelefono,correo,contrasena);
   }
